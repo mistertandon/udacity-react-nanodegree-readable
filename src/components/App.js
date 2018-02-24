@@ -1,13 +1,25 @@
-import React, { Component } from 'react';
-import logo from './../logo.svg';
-import './../App.css';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import './../App.css'
+import API from './../utils/api'
+import { addCategories } from './../actions/index'
 
 class App extends Component {
+
+  componentDidMount() {
+
+    API.getAllCategories()
+      .then(categories => {
+
+        this.props.dispatchAddCategories(categories);
+      });
+  }
+
   render() {
+
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
@@ -18,4 +30,21 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+
+  return {
+    ...state
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+
+  return {
+    dispatchAddCategories: (categories) => {
+      console.log(categories);
+      dispatch(addCategories(categories))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
