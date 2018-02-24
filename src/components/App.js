@@ -5,6 +5,7 @@ import './../css/index.css'
 
 import API from './../utils/api'
 import { addCategories } from './../actions/index'
+import Category from './category'
 
 class App extends Component {
 
@@ -23,16 +24,11 @@ class App extends Component {
     console.log(this.props);
     return (
       <div className="App">
-        <div className="category--container">
-          {
-            category && category.length && category.map((category, index) => (
-              <div key={`${index}_category`}
-                className="category--item">{category.name}</div>
-            ))
-          }
-        </div>
+        {
+          category && category.length && (<Category categories={category} />)
+        }
       </div>
-    );
+    )
   }
 }
 
