@@ -1,3 +1,5 @@
+import { ADD_POSTS } from './../actions/postAction'
+
 const state = {
   'posts': []
 }
@@ -6,7 +8,7 @@ export function post(state = {}, action) {
 
   switch (action.type) {
 
-    case 'GET_CATEGORY_POST': return {
+    case ADD_POSTS: return {
       ...state,
       'posts': action.posts
     }

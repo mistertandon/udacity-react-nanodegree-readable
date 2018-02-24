@@ -1,5 +1,6 @@
-import { getAllCategories } from './../utils/apiEndPoints'
+import { getAllCategories, getAllPosts } from './../utils/apiEndPoints'
 
 export default {
-  getAllCategories
+  getAllCategories,
+  getAllPosts
 }

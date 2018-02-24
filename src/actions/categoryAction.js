@@ -6,5 +6,4 @@ export function addCategories({ categories }) {
     type: ADD_CATEGORIES,
     categories
   }
-
 }

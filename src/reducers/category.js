@@ -1,4 +1,4 @@
-import { ADD_CATEGORIES } from './../actions/index.js'
+import { ADD_CATEGORIES } from './../actions/categoryAction'
 
 const state = {
   'categories': []

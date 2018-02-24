@@ -20,3 +20,14 @@ export function getAllCategories() {
   })
     .then((response) => response.json())
 }
+
+export function getAllPosts() {
+
+  return fetch(`${apiHost}posts`, {
+    'method': 'GET',
+    'headers': {
+      ...headers
+    }
+  })
+    .then(response => response.json())
+}
