@@ -1,0 +1,10 @@
+.category--container{
+  display:flex;
+  flex-direction:row;
+  flex-wrap:wrap;
+  justify-content: center;
+}
+.category--item{
+  flex-grow:1;
+  max-width: 150px;
+}

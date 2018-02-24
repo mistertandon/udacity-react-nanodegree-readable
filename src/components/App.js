@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import './../App.css'
+import './../css/index.css'
+
 import API from './../utils/api'
 import { addCategories } from './../actions/index'
 
@@ -17,14 +19,18 @@ class App extends Component {
 
   render() {
 
+    const { category } = this.props;
+    console.log(this.props);
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="category--container">
+          {
+            category && category.length && category.map((category, index) => (
+              <div key={`${index}_category`}
+                className="category--item">{category.name}</div>
+            ))
+          }
+        </div>
       </div>
     );
   }
@@ -33,7 +39,8 @@ class App extends Component {
 function mapStateToProps(state) {
 
   return {
-    ...state
+    ...state,
+    category: state['category']['categories']
   }
 }
 
@@ -41,7 +48,6 @@ function mapDispatchToProps(dispatch) {
 
   return {
     dispatchAddCategories: (categories) => {
-      console.log(categories);
       dispatch(addCategories(categories))
     }
   }
