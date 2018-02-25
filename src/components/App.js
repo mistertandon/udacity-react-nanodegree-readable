@@ -14,6 +14,7 @@ import { addPosts } from './../actions/postAction'
 
 import Category from './category'
 import Post from './post'
+import CategoryWisePosts from './categoryWisePosts'
 
 class App extends Component {
 
@@ -42,14 +43,14 @@ class App extends Component {
                   /**
                    * Calling `Category` react component.
                    */
-                  category && category.categories && category.categories.length && (<Category categories={category.categories} />)
+                  category && category.length && (<Category categories={category} />)
                 }
                 {
                   /**
                    * Checking `post && post.posts && post.posts.length` variable, and
                    * render post headers.
                    */
-                  post && post.posts && post.posts.length && (<Post posts={post.posts} />)
+                  post && post.length && (<Post posts={post} />)
                 }
               </div>
             )
@@ -57,7 +58,9 @@ class App extends Component {
 
         <Route path="/category" render={
           () => (
-            <div>Hello</div>
+
+            <CategoryWisePosts />
+
           )
         } />
 
@@ -75,7 +78,8 @@ function mapStateToProps(state) {
 
   return {
     ...state,
-    category: state['category']['categories']
+    category: state.category.category,
+    post: state.post.post
   }
 }
 

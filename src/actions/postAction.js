@@ -6,7 +6,7 @@ export function getPosts(posts) {
 
   return {
     type: ADD_POSTS,
-    posts
+    posts: posts
   }
 }
 

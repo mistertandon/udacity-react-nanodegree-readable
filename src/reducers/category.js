@@ -1,7 +1,7 @@
 import { ADD_CATEGORIES } from './../actions/categoryAction'
 
 const state = {
-  'categories': []
+  category: []
 }
 
 export function category(state = {}, action) {
@@ -11,7 +11,7 @@ export function category(state = {}, action) {
     case ADD_CATEGORIES:
       return {
         ...state,
-        categories: action.categories
+        category: action.categories
       }
 
     default: return state
