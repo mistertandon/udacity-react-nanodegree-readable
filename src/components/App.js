@@ -69,10 +69,7 @@ class App extends Component {
                    * Checking `post && post.posts && post.posts.length` variable, and
                    * render post headers.
                    */
-                  post && post.posts && post.posts.length && (
-
-                    <Post posts={post.posts} />
-                  )
+                  post && post.posts && post.posts.length && (<Post posts={post.posts} />)
                 }
               </div>
             )

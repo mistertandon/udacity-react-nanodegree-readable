@@ -5,10 +5,15 @@ const Category = (props) => (
 
   <div className="category--container">
     {
-      props.categories && props.categories.length && props.categories.map((category, index) => (
-        <div key={`${index}_category`}
-          className="category--item">{category.name}</div>
-      ))
+      props.categories && props.categories.length && props.categories.map(
+        (category, index) =>
+          (
+            <div className='category--item'
+              key={`${index}_category`}>
+              <Link to='category'>{category.name}</Link>
+            </div>
+          )
+      )
     }
   </div>
 
