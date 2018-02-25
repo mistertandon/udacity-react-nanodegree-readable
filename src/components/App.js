@@ -15,16 +15,22 @@ class App extends Component {
 
   componentDidMount() {
 
+    /**
+     * @description: Initially mapping state to props and dispatch to
+     * props.
+     * Step A. Getting all the categories
+     */
     API.getAllCategories()
       .then(categories => {
-
-        this.props.dispatchAddCategories(categories);
-
+        // Step B. `dispatchAddCategories` action to set categories in state
+        return this.props.dispatchAddCategories(categories);
+      })
+      .then(result => {
+        // Step C. Getting all the posts
         return API.getAllPosts();
-
       })
       .then(posts => {
-
+        // Step D. `dispatchAddPosts` action to set posts in state
         this.props.dispatchAddPosts({ posts: posts });
       });
 
@@ -32,14 +38,24 @@ class App extends Component {
 
   render() {
 
+    /**
+     * Destructuring props in corresponding variable.
+     */
     const { category, post } = this.props;
-    console.log(post);
+
     return (
       <div className="app--container">
         {
+          /**
+           * Calling `Category` react component.
+           */
           category && category.length && (<Category categories={category} />)
         }
         {
+          /**
+           * Checking `post && post.posts && post.posts.length` variable, and
+           * render post headers.
+           */
           post && post.posts && post.posts.length && (
             <div className='posts--container'>
 
@@ -52,6 +68,9 @@ class App extends Component {
               </div>
 
               {
+                /**
+                 * Iterate over `post.posts`, to render available posts.
+                 */
                 post.posts.map((post, index) => (
                   <div key={`post_info_${index}`} className='post--container'>
 
@@ -72,6 +91,11 @@ class App extends Component {
   }
 }
 
+/**
+ * @description: `mapStateToProps` function to map state to props.
+ * @param {Object} state : Global state of the react application.
+ * @returns {Object} state object
+ */
 function mapStateToProps(state) {
 
   return {
@@ -80,6 +104,11 @@ function mapStateToProps(state) {
   }
 }
 
+/**
+ * @description: `mapDispatchToProps` function to map actions to porps.
+ * @param {Function} dispatch
+ * @returns {Object} Mapped object with dispatch actions.
+ */
 function mapDispatchToProps(dispatch) {
 
   return {
