@@ -4,12 +4,35 @@ import { Route, Link } from 'react-router-dom'
 
 import { addCategories } from './../actions/categoryAction'
 import { addPosts } from './../actions/postAction'
+import Post from './post'
 
 class CategoryWisePosts extends Component {
 
+  state = {
+    activeCategory: 'react'
+  }
+
   render() {
 
-    return (<div>categoryWisePosts</div>)
+    const { activeCategory } = this.state;
+    var post = [];
+
+    if (this.props.post && this.props.post.length) {
+
+      post = this.props.post.filter(post => post.category === activeCategory);
+    }
+
+    return (
+      <div className='category--page'>
+        <div className='category--title'>
+          {activeCategory}
+        </div>
+        {
+          post && post.length && (<Post posts={post} />)
+        }
+
+      </div>
+    )
   }
 }
 
@@ -19,11 +42,11 @@ class CategoryWisePosts extends Component {
  * @returns {Object} state object
  */
 function mapStateToProps(state) {
-  console.log(state);
+
   return {
     ...state,
-    categories: state['category']['categories'],
-    posts: state['post']['posts']
+    category: state.category.category,
+    post: state.post.post
   }
 }
 
