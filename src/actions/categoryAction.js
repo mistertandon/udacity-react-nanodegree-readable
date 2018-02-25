@@ -1,3 +1,5 @@
+import API from './../utils/api'
+
 /**
  * `ADD_CATEGORIES` constant to hold 'ADD_CATEGORIES' value.
  */
@@ -20,11 +22,10 @@ function getCategoryAction(categories) {
  * action.
  * @param {Array of objects} categories
  */
-export function addCategories({ categories }) {
+export function addCategories() {
 
-  return (dispatch) => setTimeout(
-    () => {
-      dispatch(getCategoryAction(categories))
-    }, 0
-  )
+  return dispatch => API.getAllCategories()
+    .then(
+      categories => dispatch(getCategoryAction(categories))
+    )
 }

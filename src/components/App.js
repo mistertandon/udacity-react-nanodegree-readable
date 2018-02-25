@@ -19,28 +19,8 @@ class App extends Component {
 
   componentDidMount() {
 
-    /**
-     * @description: Initially mapping state to props and dispatch to
-     * props.
-     * Step A. Getting all the categories
-     */
-    API.getAllCategories()
-      .then(categories => {
-        // Step B. `dispatchAddCategories` action to set categories in state
-        return this.props.dispatchAddCategories(categories);
-      })
-      .then(result => {
-        // Step C. Getting all the posts
-        return API.getAllPosts();
-      })
-      .then(posts => {
-        // Step D. `dispatchAddPosts` action to set posts in state
-        return this.props.dispatchAddPosts({ posts: posts });
-      })
-      .then(() => {
-
-        console.log(`State and action have been mapped.`);
-      });
+    this.props.dispatchAddCategories();
+    this.props.dispatchAddPosts();
   }
 
   render() {
@@ -53,7 +33,7 @@ class App extends Component {
     return (
       <div className="app--container">
 
-        <Route exact path='/' render={
+        <Route exact path="/" render={
           () =>
             (
               <div className='home--page'>
@@ -62,7 +42,7 @@ class App extends Component {
                   /**
                    * Calling `Category` react component.
                    */
-                  category && category.length && (<Category categories={category} />)
+                  category && category.categories && category.categories.length && (<Category categories={category.categories} />)
                 }
                 {
                   /**
@@ -73,6 +53,12 @@ class App extends Component {
                 }
               </div>
             )
+        } />
+
+        <Route path="/category" render={
+          () => (
+            <div>Hello</div>
+          )
         } />
 
       </div>
@@ -101,11 +87,11 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 
   return {
-    dispatchAddCategories: (categories) => {
-      dispatch(addCategories(categories))
+    dispatchAddCategories: () => {
+      dispatch(addCategories())
     },
-    dispatchAddPosts: (posts) => {
-      dispatch(addPosts(posts))
+    dispatchAddPosts: () => {
+      dispatch(addPosts())
     }
   }
 }

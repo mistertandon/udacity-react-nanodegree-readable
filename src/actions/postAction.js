@@ -1,3 +1,5 @@
+import API from './../utils/api'
+
 export const ADD_POSTS = 'ADD_POSTS';
 
 export function getPosts(posts) {
@@ -8,14 +10,10 @@ export function getPosts(posts) {
   }
 }
 
-export function addPosts({ posts }) {
+export function addPosts() {
 
-  return dispatch => {
-
-    setTimeout(
-      () => {
-        dispatch(getPosts(posts))
-      }, 0
+  return (dispatch) => API.getAllPosts()
+    .then(
+      posts => dispatch(getPosts(posts))
     )
-  }
 }

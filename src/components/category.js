@@ -1,22 +1,28 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
 
-const Category = (props) => (
+class Category extends Component {
 
-  <div className="category--container">
-    {
-      props.categories && props.categories.length && props.categories.map(
-        (category, index) =>
-          (
-            <div className='category--item'
-              key={`${index}_category`}>
-              <Link to='category'>{category.name}</Link>
-            </div>
+  render() {
+
+    return (
+
+      <div className="category--container">
+        {
+          this.props.categories && this.props.categories.length && this.props.categories.map(
+            (category, index) =>
+              (
+                <div className='category--item'
+                  key={`${index}_category`}>
+                  <Link to='/category'>{category.name}</Link>
+                </div>
+              )
           )
-      )
-    }
-  </div>
+        }
+      </div>
 
-)
+    )
+  }
+}
 
 export default Category;
