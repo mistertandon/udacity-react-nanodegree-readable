@@ -5,7 +5,7 @@ export const ADD_CATEGORIES = 'ADD_CATEGORIES';
 
 /**
  * @description: Action to set categories in state.
- * @param {*} categories
+ * @param {Array of objects} categories
  */
 function getCategoryAction(categories) {
 
@@ -18,8 +18,7 @@ function getCategoryAction(categories) {
 /**
  * @description: This function is a wrapper over `getCategoryAction`
  * action.
- *
- * @param {Array ob objects} categories
+ * @param {Array of objects} categories
  */
 export function addCategories({ categories }) {
 

@@ -31,9 +31,12 @@ class App extends Component {
       })
       .then(posts => {
         // Step D. `dispatchAddPosts` action to set posts in state
-        this.props.dispatchAddPosts({ posts: posts });
-      });
+        return this.props.dispatchAddPosts({ posts: posts });
+      })
+      .then(() => {
 
+        console.log(`State and action have been mapped.`);
+      });
   }
 
   render() {
