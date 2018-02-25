@@ -3,6 +3,10 @@
   margin: 0px auto;
 }
 
+.home--page{
+  width: 100%;
+}
+
 .category--container{
   display:flex;
   flex-direction:row;
