@@ -3,9 +3,14 @@ import {
   POST_DETAIL
 } from './../actions/postAction'
 
+import {
+  RETRIEVE_POST_COMMENTS
+} from './../actions/commentAction'
+
 const state = {
   posts: [],
-  postDetail: {}
+  postDetail: {},
+  comments: []
 }
 
 export function post(state = {}, action) {
@@ -20,6 +25,11 @@ export function post(state = {}, action) {
     case POST_DETAIL: return {
       ...state,
       postDetail: Object.assign({}, action.postDetail)
+    }
+
+    case RETRIEVE_POST_COMMENTS: return {
+      ...state,
+      comments: action.comments.slice(0)
     }
 
     default: return state;

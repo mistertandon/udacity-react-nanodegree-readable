@@ -1,21 +1,26 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { getPost } from './../actions/postAction'
-
 import './../css/postDetail.css'
+
+import { getPost } from './../actions/postAction'
+import { getPostComments } from './../actions/commentAction'
+
+import Comment from './../components/comment'
 
 class PostDetail extends Component {
 
   componentDidMount() {
 
-    this.props.dispatchGetPost()
+    this.props.dispatchGetPost();
   }
 
   render() {
 
     const { postDetail } = this.props.post;
+    const { id } = this.props.match.params
 
+    console.log(id);
     return (
       <div className='post--detail--container'>
         {
@@ -33,6 +38,10 @@ class PostDetail extends Component {
               <div className='post--item--detail post--general'>{new Date(postDetail.timestamp).toISOString()}</div>
             </div>
           )
+
+        }
+        {
+          <Comment id={id} />
         }
       </div>
     )

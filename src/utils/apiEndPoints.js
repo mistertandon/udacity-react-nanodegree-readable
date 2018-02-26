@@ -42,3 +42,14 @@ export function getPost(id) {
   })
     .then(response => response.json())
 }
+
+export function getPostComments(id) {
+
+  return fetch(`${apiHost}posts/${id}/comments`, {
+    'method': 'GET',
+    'headers': {
+      ...headers
+    }
+  })
+    .then(response => response.json())
+}

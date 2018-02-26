@@ -11,11 +11,14 @@ import registerServiceWorker from './registerServiceWorker';
 
 import { category } from './reducers/category'
 import { post } from './reducers/post'
+import { comment } from './reducers/comment'
+
 import App from './components/App'
 
 const appReducers = combineReducers({
   category,
-  post
+  post,
+  comment
 })
 
 const store = createStore(
