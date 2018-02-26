@@ -31,3 +31,14 @@ export function getAllPosts() {
   })
     .then(response => response.json())
 }
+
+export function getPost(id) {
+
+  return fetch(`${apiHost}posts/${id}`, {
+    'method': 'GET',
+    'headers': {
+      ...headers
+    }
+  })
+    .then(response => response.json())
+}

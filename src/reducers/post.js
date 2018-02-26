@@ -1,7 +1,11 @@
-import { ADD_POSTS } from './../actions/postAction'
+import {
+  ADD_POSTS,
+  POST_DETAIL
+} from './../actions/postAction'
 
 const state = {
-  post: []
+  posts: [],
+  postDetail: {}
 }
 
 export function post(state = {}, action) {
@@ -10,7 +14,12 @@ export function post(state = {}, action) {
 
     case ADD_POSTS: return {
       ...state,
-      post: action.posts
+      posts: action.posts.slice(0)
+    }
+
+    case POST_DETAIL: return {
+      ...state,
+      postDetail: Object.assign({}, action.postDetail)
     }
 
     default: return state;

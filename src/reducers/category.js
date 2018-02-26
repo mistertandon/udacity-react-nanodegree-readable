@@ -1,9 +1,18 @@
 import { ADD_CATEGORIES } from './../actions/categoryAction'
 
+/**
+ * `state` stores available categories.
+ */
 const state = {
-  category: []
+  categories: []
 }
 
+/**
+ * @description: `category` reducer will take `state`, `action` as parameters
+ * and mutate state object to store categories.
+ * @param {Object} state
+ * @param {Object} action
+ */
 export function category(state = {}, action) {
 
   switch (action.type) {
@@ -11,7 +20,7 @@ export function category(state = {}, action) {
     case ADD_CATEGORIES:
       return {
         ...state,
-        category: action.categories
+        categories: action.categories.slice(0)
       }
 
     default: return state

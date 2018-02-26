@@ -1,11 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
+
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
+
 import './index.css'
 import registerServiceWorker from './registerServiceWorker';
+
 import { category } from './reducers/category'
 import { post } from './reducers/post'
 import App from './components/App'

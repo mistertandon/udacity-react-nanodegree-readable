@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Route, Link } from 'react-router-dom'
 
 import './../App.css'
@@ -15,21 +14,11 @@ import { addPosts } from './../actions/postAction'
 import Category from './category'
 import Post from './post'
 import CategoryWisePosts from './categoryWisePosts'
+import PostDetail from './postDetail'
 
 class App extends Component {
 
-  componentDidMount() {
-
-    this.props.dispatchAddCategories();
-    this.props.dispatchAddPosts();
-  }
-
   render() {
-
-    /**
-     * Destructuring props in corresponding variable.
-     */
-    const { category, post } = this.props;
 
     return (
       <div className="app--container">
@@ -43,61 +32,25 @@ class App extends Component {
                   /**
                    * Calling `Category` react component.
                    */
-                  category && category.length && (<Category categories={category} />)
                 }
+                <Category />
                 {
                   /**
-                   * Checking `post && post.posts && post.posts.length` variable, and
-                   * render post headers.
+                   * Calling `Post` react component.
                    */
-                  post && post.length && (<Post posts={post} />)
                 }
+                <Post />
               </div>
             )
         } />
 
-        <Route path="/category" render={
-          () => (
+        <Route path="/category" component={CategoryWisePosts} />
 
-            <CategoryWisePosts />
-
-          )
-        } />
+        <Route path='/postDetail/:id' component={PostDetail} />
 
       </div>
     )
   }
 }
 
-/**
- * @description: `mapStateToProps` function to map state to props.
- * @param {Object} state : Global state of the react application.
- * @returns {Object} state object
- */
-function mapStateToProps(state) {
-
-  return {
-    ...state,
-    category: state.category.category,
-    post: state.post.post
-  }
-}
-
-/**
- * @description: `mapDispatchToProps` function to map actions to porps.
- * @param {Function} dispatch
- * @returns {Object} Mapped object with dispatch actions.
- */
-function mapDispatchToProps(dispatch) {
-
-  return {
-    dispatchAddCategories: () => {
-      dispatch(addCategories())
-    },
-    dispatchAddPosts: () => {
-      dispatch(addPosts())
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
