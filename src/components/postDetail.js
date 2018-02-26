@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 
 import { getPost } from './../actions/postAction'
 
+import './../css/postDetail.css'
+
 class PostDetail extends Component {
 
   componentDidMount() {
@@ -12,16 +14,31 @@ class PostDetail extends Component {
 
   render() {
 
-    let postDetail;
+    var postDetail = {};
 
-    if (Object.keys(this.props.post).length) {
-      postDetail = Object.assign({}, this.props.post.postDetal);
+    if (this.props.post.postDetail !== 'undefined') {
+
+      postDetail = this.props.post.postDetail;
     }
 
+    console.log(postDetail);
     return (
-      <div className='post--detaill-container'>
+      <div className='post--detail--container'>
         {
-          postDetail && (<div>PostDetail</div>)
+          this.props.post.postDetail && (
+            <div className='post--detail'>
+              <div className='post--item--key post--general'>Title</div>
+              <div className='post--item--detail post--general'>{postDetail.title}</div>
+              <div className='post--item--key post--general'>Author</div>
+              <div className='post--item--detail post--general'>{postDetail.author}</div>
+              <div className='post--item--key post--general'>Body</div>
+              <div className='post--item--detail post--general'>{postDetail.body}</div>
+              <div className='post--item--key post--general'>Comments count</div>
+              <div className='post--item--detail post--general'>{postDetail.voteScore}</div>
+              <div className='post--item--key post--general'>Last Modified Time</div>
+              <div className='post--item--detail post--general'>{new Date(postDetail.timestamp).toISOString()}</div>
+            </div>
+          )
         }
       </div>
     )
