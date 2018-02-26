@@ -1,9 +1,12 @@
-.category--page{
-  width: 100%;
+.category--container{
   display:flex;
-  flex-direction: column;
+  flex-direction:row;
+  flex-wrap:wrap;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-.category--title{
-  flex-grow: 0.5;
+.category--item{
+  flex-grow:1;
+  max-width: 150px;
 }

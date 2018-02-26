@@ -2,11 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Link } from 'react-router-dom'
 
+import './../css/categoryWise.css'
+
 import { addCategories } from './../actions/categoryAction'
 import { addPosts } from './../actions/postAction'
 import Post from './post'
 
 class CategoryWisePosts extends Component {
+
+  componentDidMount() {
+
+    this.props.dispatchAddCategories();
+    this.props.dispatchAddPosts();
+  }
 
   state = {
     activeCategory: 'react'
@@ -15,12 +23,13 @@ class CategoryWisePosts extends Component {
   render() {
 
     const { activeCategory } = this.state;
+    const { categories, posts } = this.props;
     var post = [];
 
-    if (this.props.post && this.props.post.length) {
+    // if (this.props.post && this.props.post.length) {
 
-      post = this.props.post.filter(post => post.category === activeCategory);
-    }
+    //   post = this.props.post.filter(post => post.category === activeCategory);
+    // }
 
     return (
       <div className='category--page'>
@@ -28,7 +37,7 @@ class CategoryWisePosts extends Component {
           {activeCategory}
         </div>
         {
-          post && post.length && (<Post posts={post} />)
+          // post && post.length && (<Post posts={post} />)
         }
 
       </div>
@@ -45,8 +54,8 @@ function mapStateToProps(state) {
 
   return {
     ...state,
-    category: state.category.category,
-    post: state.post.post
+    categories: Object.assign({}, state.category.categories),
+    posts: Object.assign({}, state.post.posts)
   }
 }
 

@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+
+import './../css/category.css'
+
 import { addCategories } from './../actions/categoryAction'
 
 class Category extends Component {

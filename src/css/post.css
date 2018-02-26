@@ -1,0 +1,35 @@
+.posts--container{
+  display:flex;
+  flex-direction: column;
+  align-content:center;
+  max-width: 100%;
+  margin-top: 50px;
+}
+
+.post--container{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content:space-around;
+  min-height: 100px;
+}
+
+.post--item{
+  max-width: 200px;
+}
+
+.post--item--a{
+  flex-grow: 1;
+}
+
+.post--item--b{
+  flex-grow: 0.4;
+}
+
+.post--item--c{
+  flex-grow: 0.2;
+}
+
+.post--headers{
+  min-height: 50px;
+}

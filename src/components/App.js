@@ -11,6 +11,7 @@ import API from './../utils/api'
 import { addCategories } from './../actions/categoryAction'
 import { addPosts } from './../actions/postAction'
 
+import Header from './header'
 import Category from './category'
 import Post from './post'
 import CategoryWisePosts from './categoryWisePosts'
@@ -22,7 +23,7 @@ class App extends Component {
 
     return (
       <div className="app--container">
-
+        <Header />
         <Route exact path="/" render={
           () =>
             (
