@@ -11,7 +11,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   align-content:space-around;
-  min-height: 100px;
+  min-height: 60px;
 }
 
 .post--item{

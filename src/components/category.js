@@ -9,12 +9,13 @@ import { addCategories } from './../actions/categoryAction'
 class Category extends Component {
 
   componentDidMount() {
+
     this.props.dispatchAddCategories();
   }
 
   render() {
 
-    const { categories } = this.props;
+    const { categories } = this.props.category;
 
     return (
 
@@ -41,13 +42,7 @@ class Category extends Component {
  * @param {Object} state : Global state of the react application.
  * @returns {Object} state object
  */
-function mapStateToProps(state) {
-
-  return {
-    ...state,
-    categories: state.category.categories,
-  }
-}
+const mapStateToProps = (state) => state
 
 /**
  * @description: `mapDispatchToProps` function to map actions to porps.

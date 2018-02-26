@@ -14,18 +14,12 @@ class PostDetail extends Component {
 
   render() {
 
-    var postDetail = {};
+    const { postDetail } = this.props.post;
 
-    if (this.props.post.postDetail !== 'undefined') {
-
-      postDetail = this.props.post.postDetail;
-    }
-
-    console.log(postDetail);
     return (
       <div className='post--detail--container'>
         {
-          this.props.post.postDetail && (
+          postDetail && (
             <div className='post--detail'>
               <div className='post--item--key post--general'>Title</div>
               <div className='post--item--detail post--general'>{postDetail.title}</div>

@@ -15,7 +15,7 @@ class Post extends Component {
 
   render() {
 
-    const { post } = this.props;
+    const { posts } = this.props.post;
 
     return (
 
@@ -33,7 +33,7 @@ class Post extends Component {
           /**
            * Iterate over `post.posts`, to render available posts.
            */
-          post.posts && post.posts.length && post.posts.map((post, index) => (
+          posts && posts.length && posts.map((post, index) => (
 
             <div key={`post_info_${index}`} className='post--container'>
 
@@ -59,13 +59,7 @@ class Post extends Component {
  * @param {Object} state : Global state of the react application.
  * @returns {Object} state object
  */
-function mapStateToProps(state) {
-
-  return {
-    ...state,
-    posts: state.post.posts
-  }
-}
+const mapStateToProps = (state) => state
 
 /**
  * @description: `mapDispatchToProps` function to map actions to porps.
