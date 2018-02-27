@@ -1,0 +1,11 @@
+.modalContainer{
+    display:flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.modal--close{
+  width: 60px;
+  height: 30px;
+  align-self: flex-end;
+}

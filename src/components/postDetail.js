@@ -22,6 +22,7 @@ class PostDetail extends Component {
 
     console.log(id);
     return (
+
       <div className='post--detail--container'>
         {
           postDetail && (
