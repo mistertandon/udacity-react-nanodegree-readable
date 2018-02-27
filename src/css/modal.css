@@ -14,12 +14,13 @@
 
 #comment-title, #comment-body{
   border-style: none;
+  border-bottom: 1px solid #C7C7C7;
   padding-left: 5px;
   width: 80%;
 }
 
 .modal--comment--author--title, .modal--comment--body--title{
-  height: 50px;
+  height: 25px;
 }
 
 .modal--comment--author--input{

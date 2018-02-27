@@ -1,5 +1,7 @@
 .comments--container{
   width: 90%;
+  display: flex;
+  flex-direction: column;
 }
 
 .comment--header{
@@ -9,10 +11,13 @@
 }
 
 .comment--container{
-  width: 100%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   align-content: center;
+  border-bottom: 1px double #C7C7C7;
+  margin-left: 8%;
+  margin-bottom: 10px;
 }
 
 .comment--body{
@@ -20,9 +25,6 @@
   flex-direction: row;
   flex-wrap: nowrap;
   flex-grow: 1;
-  padding-left:8%;
-  height: 50px;
-  max-height: 60px;
 }
 
 .comment--content{
@@ -31,7 +33,7 @@
 }
 
 .comment--actions{
-  flex-grow: 0.3;
+  flex-grow: 0.01;
   font-weight: bold;
   font-family: 'Gochi Hand';
 }
@@ -41,6 +43,11 @@
   text-align: right;
   flex-grow: 1;
   font-family: 'Caveat'
+}
+
+.comment--add--container{
+  width: 90%;
+  margin-left: 8%;
 }
 
 .comment--add{

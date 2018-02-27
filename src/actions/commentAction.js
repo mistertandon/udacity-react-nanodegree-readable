@@ -29,7 +29,7 @@ export const getPostComments = (id) => {
  * @param {*} id
  */
 export const addPostCommentAction = (resposneComment) => {
-
+  console.log(resposneComment);
   return {
     type: ADD_COMMENT,
     response_comment: resposneComment
