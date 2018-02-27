@@ -9,10 +9,10 @@ import { getPostComments } from './../actions/commentAction'
 
 const customStyles = {
   content: {
-    top: '20%',
-    width: '60%',
-    height: '500px',
-    left: '5%',
+    top: '23%',
+    width: '50%',
+    height: '400px',
+    left: '12.5%',
     right: 'auto',
     bottom: 'auto',
     transform: 'translate(20%, -10%)'
@@ -115,7 +115,7 @@ class Comment extends Component {
           {
             isCommentModalOpen && (
 
-              <div className='modalContainer'>
+              <div className='modal--container'>
                 <div className='modal--close'>
                   <button className='modal--close--btn'
                     onClick={this.closeCommentModal}
@@ -129,7 +129,26 @@ class Comment extends Component {
                     isEditOperation && (`Edit Comment`)
                   }
                 </div>
-                Hello Comment Modal
+
+                <form>
+                  <div className='modal--comment--author--title'>
+                    Author
+                  </div>
+                  <div className='modal--comment--author--input'>
+                    <input type='text' name='title' id='comment-title' placeholder='Comment title' />
+                  </div>
+                  <div className='modal--comment--body--title'>
+                    Body
+                  </div>
+                  <div className='modal--comment--body--input'>
+                    <textarea name='body' id='comment-body'></textarea>
+                  </div>
+                  <div className='modal--comment--submit'>
+                    <input type='submit' name='commentSubmit' />
+                  </div>
+                </form>
+
+
               </div>
             )
           }

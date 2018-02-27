@@ -1,4 +1,5 @@
-.modalContainer{
+.modal--container{
+    padding-left: 10%;
     display:flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -8,4 +9,31 @@
   width: 60px;
   height: 30px;
   align-self: flex-end;
+}
+
+
+#comment-title, #comment-body{
+  border-style: none;
+  padding-left: 5px;
+  width: 80%;
+}
+
+.modal--comment--author--title, .modal--comment--body--title{
+  height: 50px;
+}
+
+.modal--comment--author--input{
+  height: 70px;
+}
+
+#comment-title{
+  height: 50px;
+}
+
+.modal--comment--body--input{
+  height: 125px;
+}
+
+#comment-body{
+  height: 100px;
 }
