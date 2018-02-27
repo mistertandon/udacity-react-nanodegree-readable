@@ -53,3 +53,16 @@ export function getPostComments(id) {
   })
     .then(response => response.json())
 }
+
+export function addPostComment(commentObj) {
+
+  return fetch(`${apiHost}comments`, {
+    'method': 'POST',
+    'headers': {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    'body': JSON.stringify(commentObj),
+  })
+    .then(response => response.json())
+}

@@ -1,18 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Modal from 'react-modal'
+import serializeForm from 'form-serialize'
+import uuid from 'uuid'
 
 import './../css/comment.css'
 import './../css/modal.css'
 
-import { getPostComments } from './../actions/commentAction'
+import {
+  getPostComments,
+  addPostComment
+} from './../actions/commentAction'
 
 const customStyles = {
   content: {
     top: '23%',
     width: '50%',
     height: '400px',
-    left: '12.5%',
+    left: '12%',
     right: 'auto',
     bottom: 'auto',
     transform: 'translate(20%, -10%)'
@@ -54,6 +59,22 @@ class Comment extends Component {
         isEditOperation: false
       }
     ))
+  }
+
+  handleCommentAction = (event) => {
+
+    event.preventDefault();
+
+    const value = serializeForm(event.target, { hash: true });
+
+    const commentObj = Object.assign(value, {
+      id: uuid(),
+      parentId: this.props.id,
+      timestamp: Date.now()
+    });
+
+    this.props.dispactaddPostComment(commentObj);
+    this.closeCommentModal();
   }
 
   render() {
@@ -130,12 +151,12 @@ class Comment extends Component {
                   }
                 </div>
 
-                <form>
+                <form onSubmit={this.handleCommentAction}>
                   <div className='modal--comment--author--title'>
                     Author
                   </div>
                   <div className='modal--comment--author--input'>
-                    <input type='text' name='title' id='comment-title' placeholder='Comment title' />
+                    <input type='text' name='author' id='comment-title' placeholder='Comment title' />
                   </div>
                   <div className='modal--comment--body--title'>
                     Body
@@ -169,6 +190,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
     dispatchPostComments: () => {
       dispatch(getPostComments(id))
+    },
+    dispactaddPostComment: (commentObj) => {
+      dispatch(addPostComment(commentObj))
     }
   }
 }
