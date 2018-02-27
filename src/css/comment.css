@@ -43,3 +43,7 @@
   flex-grow: 1;
   font-family: 'Caveat'
 }
+
+.comment--add{
+  height:20px;
+}

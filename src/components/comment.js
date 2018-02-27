@@ -19,7 +19,7 @@ class Comment extends Component {
     return (
       <div className='comments--container'>
         <div className='comment--header'>
-            Post comments
+          Post comments
         </div>
         {
           comments && comments.length && (
@@ -41,6 +41,20 @@ class Comment extends Component {
             ))
           )
         }
+        {
+          comments && comments.length === 0 && (
+            <div className='comment--container'>
+              No Comments found
+            </div>
+          )
+        }
+
+        <div className='comment--container'>
+          <div className='comment--body'>
+            <button className='comment--add'>Add</button>&nbsp;new comment
+        </div>
+        </div>
+
       </div>
     )
   }
