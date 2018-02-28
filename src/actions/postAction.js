@@ -2,6 +2,7 @@ import API from './../utils/api'
 
 export const ADD_POSTS = 'ADD_POSTS';
 export const POST_DETAIL = 'POST_DETAIL';
+export const ADD_POST = 'ADD_POST';
 
 function addPostsAction(posts) {
 
@@ -29,4 +30,18 @@ export const getPost = (id) => {
 
   return (dispatch) => API.getPost(id)
     .then(postDetail => dispatch(getPostAction(postDetail)))
+}
+
+export const addPostAction = (post) => {
+
+  return {
+    type: ADD_POST,
+    added_post: post
+  }
+}
+
+export const addPost = (post) => {
+
+  return dispatch => API.addPost(post)
+    .then(responsePost => dispatch(addPostAction(responsePost)))
 }

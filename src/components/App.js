@@ -16,6 +16,7 @@ import Category from './category'
 import Post from './post'
 import CategoryWisePosts from './categoryWisePosts'
 import PostDetail from './postDetail'
+import CreatePost from './createPost'
 
 class App extends Component {
 
@@ -48,6 +49,7 @@ class App extends Component {
         <Route path="/category" component={CategoryWisePosts} />
 
         <Route path='/postDetail/:id' component={PostDetail} />
+        <Route path='/createPost/' component={CreatePost} />
 
       </div>
     )

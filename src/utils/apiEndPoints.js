@@ -79,3 +79,16 @@ export function editPostComment(commentObject) {
   })
     .then(response => response.json())
 }
+
+export const addPost = (post) => {
+
+  return fetch(`${apiHost}posts`, {
+    'method': 'POST',
+    'headers': {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    'body': JSON.stringify(post)
+  })
+    .then(response => response.json())
+}

@@ -100,11 +100,9 @@ class Comment extends Component {
     event.preventDefault();
 
     const value = serializeForm(event.target, { hash: true });
-
     const commentObj = Object.assign(value, { timestamp: Date.now() })
 
     this.state.isEditOperation && this.props.dispactEditPostComment(commentObj);
-
     this.closeCommentModal();
   }
 

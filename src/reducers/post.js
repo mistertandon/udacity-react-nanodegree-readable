@@ -1,6 +1,7 @@
 import {
   ADD_POSTS,
-  POST_DETAIL
+  POST_DETAIL,
+  ADD_POST
 } from './../actions/postAction'
 
 import {
@@ -30,6 +31,11 @@ export function post(state = {}, action) {
     case RETRIEVE_POST_COMMENTS: return {
       ...state,
       comments: action.comments.slice(0)
+    }
+
+    case ADD_POST: return {
+      ...state,
+      posts: state.posts.concat([action.added_post])
     }
 
     default: return state;

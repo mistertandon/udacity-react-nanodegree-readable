@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Router, Link } from 'react-router-dom'
 
 import MdDelete from 'react-icons/lib/md/delete'
 import MdEdit from 'react-icons/lib/md/edit'
@@ -9,9 +10,6 @@ import MdChevronRight from 'react-icons/lib/md/chevron-right'
 import MdThumbDown from 'react-icons/lib/md/thumb-down'
 import MdThumbUp from 'react-icons/lib/md/thumb-up'
 import MdAddCircle from 'react-icons/lib/md/add-circle'
-
-
-
 
 import './../css/postDetail.css'
 
@@ -37,9 +35,9 @@ class PostDetail extends Component {
     return (
 
       <div className='post--detail--container'>
-      <div className='post--add--new'>
-        <MdAddCircle size={28}/>
-      </div>
+        <div className='post--add--new'>
+          <Link to='/createPost'><MdAddCircle size={28} /></Link>
+        </div>
         {
 
           postDetail && (
