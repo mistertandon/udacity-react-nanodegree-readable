@@ -4,16 +4,63 @@
   flex-direction: column;
 }
 
+.post--add--new{
+  padding-left:7%;
+  height: 30px;
+}
+
 .post--detail{
+  width: 90%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.post--general{
+.post--detail--first--row{
   min-height: 30px;
-  padding: 5px;
+}
+
+.post--detail--second--row{
+  min-height: 100px;
+}
+.post--detail--second--row{
+  min-height: 50px;
+}
+
+.post--item--vote{
+  padding-left: 8%;
+  width: 12%;
+}
+
+.post--item--title{
+  width: 80%;
+  text-align: left;
+}
+
+.post--item--body{
+  width: 90%;
+  padding-left: 6%;
+  text-align: left;
+  height: 100px;
+
+}
+
+.post--item--author{
+  padding-left: 8%;
+  flex-grow: 1;
+}
+
+.post--item--edit, .post--item--delete{
+  flex-grow: 0.06;
+}
+
+.post--item--thumb-down{
+  flex-grow: 0.06;
+}
+
+.post--item--thumb--up{
+  flex-grow: 0.06;
 }
 
 .post--item--key{

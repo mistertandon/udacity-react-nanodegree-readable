@@ -1,6 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import MdDelete from 'react-icons/lib/md/delete'
+import MdEdit from 'react-icons/lib/md/edit'
+import FaHeart from 'react-icons/lib/fa/heart'
+import MdChevronLeft from 'react-icons/lib/md/chevron-left'
+import MdChevronRight from 'react-icons/lib/md/chevron-right'
+import MdThumbDown from 'react-icons/lib/md/thumb-down'
+import MdThumbUp from 'react-icons/lib/md/thumb-up'
+import MdAddCircle from 'react-icons/lib/md/add-circle'
+
+
+
+
 import './../css/postDetail.css'
 
 import { getPost } from './../actions/postAction'
@@ -9,6 +21,8 @@ import { getPostComments } from './../actions/commentAction'
 import Comment from './../components/comment'
 
 class PostDetail extends Component {
+
+  iconSize = 22;
 
   componentDidMount() {
 
@@ -20,23 +34,42 @@ class PostDetail extends Component {
     const { postDetail } = this.props.post;
     const { id } = this.props.match.params
 
-    console.log(id);
     return (
 
       <div className='post--detail--container'>
+      <div className='post--add--new'>
+        <MdAddCircle size={28}/>
+      </div>
         {
+
           postDetail && (
             <div className='post--detail'>
-              <div className='post--item--key post--general'>Title</div>
-              <div className='post--item--detail post--general'>{postDetail.title}</div>
-              <div className='post--item--key post--general'>Author</div>
-              <div className='post--item--detail post--general'>{postDetail.author}</div>
-              <div className='post--item--key post--general'>Body</div>
-              <div className='post--item--detail post--general'>{postDetail.body}</div>
-              <div className='post--item--key post--general'>Comments count</div>
-              <div className='post--item--detail post--general'>{postDetail.voteScore}</div>
-              <div className='post--item--key post--general'>Last Modified Time</div>
-              <div className='post--item--detail post--general'>{new Date(postDetail.timestamp).toISOString()}</div>
+
+              <div className='post--item--vote post--detail--first--row'>
+                <FaHeart />
+                <MdChevronLeft size={this.iconSize} />&nbsp;
+                {postDetail.voteScore}&nbsp;
+                <MdChevronRight size={this.iconSize} />
+              </div>
+              <div className='post--item--title post--detail--first--row'>{postDetail.title}</div>
+              <div className='post--item--body post--detail--second--row'>{postDetail.body}</div>
+              <div className='post--item--author post--detail--third--row'>
+                Written by: {postDetail.author},&nbsp;{new Date(postDetail.timestamp).toISOString()}
+              </div>
+
+
+              <div className='post--item--thumb-down post--detail--third--row'>
+                <MdThumbUp size={this.iconSize} />
+              </div>
+              <div className='post--item--thumb--up post--detail--third--row'>
+                <MdThumbDown size={this.iconSize} />
+              </div>
+              <div className='post--item--edit post--detail--third--row'>
+                <MdEdit size={this.iconSize} />
+              </div>
+              <div className='post--item--delete post--detail--third--row'>
+                <MdDelete size={this.iconSize} />
+              </div>
             </div>
           )
 
