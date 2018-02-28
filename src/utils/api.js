@@ -3,7 +3,8 @@ import {
   getAllPosts,
   getPost,
   getPostComments,
-  addPostComment
+  addPostComment,
+  editPostComment
 } from './../utils/apiEndPoints'
 
 export default {
@@ -11,5 +12,6 @@ export default {
   getAllPosts,
   getPost,
   getPostComments,
-  addPostComment
+  addPostComment,
+  editPostComment
 }

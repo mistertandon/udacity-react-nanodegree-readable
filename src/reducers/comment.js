@@ -1,6 +1,7 @@
 import {
   RETRIEVE_POST_COMMENTS,
-  ADD_COMMENT
+  ADD_COMMENT,
+  EDIT_COMMENT
 } from './../actions/commentAction'
 
 const state = {
@@ -9,7 +10,7 @@ const state = {
 }
 
 export function comment(state = {}, action) {
-  console.log(state);
+
   switch (action.type) {
 
     case RETRIEVE_POST_COMMENTS: return {
@@ -20,6 +21,11 @@ export function comment(state = {}, action) {
     case ADD_COMMENT: return {
       ...state,
       comments: state.comments.concat([action.response_comment])
+    }
+
+    case EDIT_COMMENT: return {
+      ...state,
+      comments: state.comments.filter(comment => comment.id !== action.edited_comment.id).concat([action.edited_comment])
     }
 
     default: return state;

@@ -66,3 +66,16 @@ export function addPostComment(commentObj) {
   })
     .then(response => response.json())
 }
+
+export function editPostComment(commentObject) {
+
+  return fetch(`${apiHost}comments/${commentObject.id}`, {
+    'method': 'PUT',
+    'headers': {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    'body': JSON.stringify(commentObject)
+  })
+    .then(response => response.json())
+}

@@ -32,10 +32,12 @@
   font-family: 'Marck Script';
 }
 
-.comment--actions{
-  flex-grow: 0.01;
-  font-weight: bold;
-  font-family: 'Gochi Hand';
+.comment--vote{
+  flex-grow: 0.05;
+}
+
+.comment--actions--edit, .comment--actions--delete{
+  flex-grow: 0.03;
 }
 
 .comment--info{

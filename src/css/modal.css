@@ -5,12 +5,17 @@
     flex-wrap: nowrap;
 }
 
+.modal--header{
+  height: 35px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 .modal--close{
   width: 60px;
   height: 30px;
   align-self: flex-end;
 }
-
 
 #comment-title, #comment-body{
   border-style: none;
@@ -25,6 +30,11 @@
 
 .modal--comment--author--input{
   height: 70px;
+}
+
+.modal--comment--author--input--edit{
+  height: 35px;
+  font-style: italic;
 }
 
 #comment-title{
