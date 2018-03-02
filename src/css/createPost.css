@@ -5,6 +5,12 @@
   margin-top: 30px;
 }
 
+.create--post--heading{
+  height: 34px;
+  line-height: 34px;
+  text-align: center;
+}
+
 .post--title--general{
   height: 30px;
   margin-bottom: 5px;

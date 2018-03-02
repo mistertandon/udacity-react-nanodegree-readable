@@ -36,7 +36,19 @@ class PostDetail extends Component {
 
       <div className='post--detail--container'>
         <div className='post--add--new'>
-          <Link to='/createPost'><MdAddCircle size={28} /></Link>
+          <Link to={
+            {
+              pathname: '/createPost',
+              state: {
+                isAddOperation: true,
+                isEditOperation: false,
+                id: ''
+              }
+            }
+          }
+          >
+            <MdAddCircle size={28} />
+          </Link>
         </div>
         {
 

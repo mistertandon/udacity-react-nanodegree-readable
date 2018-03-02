@@ -92,3 +92,16 @@ export const addPost = (post) => {
   })
     .then(response => response.json())
 }
+
+export const editPost = (post) => {
+
+  return fetch(`${apiHost}posts/${post.id}`, {
+    'method': 'PUT',
+    'headers': {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    'body': JSON.stringify(post)
+  })
+    .then(response => response.json())
+}

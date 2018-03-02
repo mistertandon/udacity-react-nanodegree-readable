@@ -3,6 +3,7 @@ import API from './../utils/api'
 export const ADD_POSTS = 'ADD_POSTS';
 export const POST_DETAIL = 'POST_DETAIL';
 export const ADD_POST = 'ADD_POST';
+export const EDIT_POST = 'EDIT_POST';
 
 function addPostsAction(posts) {
 
@@ -44,4 +45,18 @@ export const addPost = (post) => {
 
   return dispatch => API.addPost(post)
     .then(responsePost => dispatch(addPostAction(responsePost)))
+}
+
+export const editPostAction = (post) => {
+
+  return {
+    type: EDIT_POST,
+    edited_post: post
+  }
+}
+
+export const editPost = (post) => {
+
+  return dispatch => API.editPost(post)
+    .then(responsePost => dispatch(editPostAction(responsePost)))
 }

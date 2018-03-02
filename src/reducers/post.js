@@ -1,7 +1,8 @@
 import {
   ADD_POSTS,
   POST_DETAIL,
-  ADD_POST
+  ADD_POST,
+  EDIT_POST
 } from './../actions/postAction'
 
 import {
@@ -36,6 +37,11 @@ export function post(state = {}, action) {
     case ADD_POST: return {
       ...state,
       posts: state.posts.concat([action.added_post])
+    }
+
+    case EDIT_POST: return {
+      ...state,
+      posts: state.posts.filter(post => post.id !== action.edited_post.id).concat([action.edited_post])
     }
 
     default: return state;

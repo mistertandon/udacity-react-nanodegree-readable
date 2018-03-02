@@ -1,3 +1,13 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  border: 1px solid #C7C7C7;
+  border-collapse: collapse;
+}
+
 .app--container{
   max-width: 960px;
   margin: 0px auto;

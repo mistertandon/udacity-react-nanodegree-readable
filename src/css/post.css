@@ -15,21 +15,28 @@
 }
 
 .post--item{
-  max-width: 200px;
+  word-wrap: break-word;
 }
 
 .post--item--a{
-  flex-grow: 1;
+  width: 400px;
+  max-width: 400px;
 }
 
 .post--item--b{
-  flex-grow: 0.4;
+  width: 150px;
+  max-width: 150px;
 }
 
 .post--item--c{
-  flex-grow: 0.2;
+  width: 100px;
+  max-width: 100px;
 }
 
 .post--headers{
   min-height: 50px;
+}
+
+.post--actions{
+  flex-grow: 0.2;
 }

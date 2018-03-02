@@ -46,10 +46,10 @@ class App extends Component {
             )
         } />
 
-        <Route path="/category" component={CategoryWisePosts} />
+        <Route exact path='/category' component={CategoryWisePosts} />
 
-        <Route path='/postDetail/:id' component={PostDetail} />
-        <Route path='/createPost/' component={CreatePost} />
+        <Route exact path='/postDetail/:id' component={PostDetail} />
+        <Route exact path='/createPost/' component={CreatePost} />
 
       </div>
     )
