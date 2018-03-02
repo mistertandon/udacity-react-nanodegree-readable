@@ -135,7 +135,7 @@ class CreatePost extends Component {
           </div>
           <div className='post--form--field--wrapper'>
             <select name='category'
-              readOnly={isEditOperation}
+              key={this.getStatePropertyPathValue('postDetail', 'category')}
               defaultValue={this.getStatePropertyPathValue('postDetail', 'category')}
               className='post--form--field--general post--category--field'>
               {
