@@ -41,7 +41,7 @@ class App extends Component {
                    * Calling `Post` react component.
                    */
                 }
-                <Post />
+                <Post activeCategory={'all'}/>
               </div>
             )
         } />

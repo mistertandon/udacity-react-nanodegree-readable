@@ -26,7 +26,14 @@ class Category extends Component {
               (
                 <div className='category--item'
                   key={`${index}_category`}>
-                  <Link to='/category'>{category.name}</Link>
+                  <Link to={
+                    {
+                      pathname: '/category',
+                      state: {
+                        activeCategory: `${category.name}`
+                      }
+                    }
+                  }>{category.name}</Link>
                 </div>
               )
           )

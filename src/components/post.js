@@ -14,6 +14,11 @@ class Post extends Component {
 
   iconDefaultSize = 22;
 
+  state = {
+    activeCategory: '',
+    posts: []
+  }
+
   componentDidMount() {
 
     this.props.dispatchAddPosts();
@@ -84,7 +89,19 @@ class Post extends Component {
  * @param {Object} state : Global state of the react application.
  * @returns {Object} state object
  */
-const mapStateToProps = (state) => state
+const mapStateToProps = (state, ownProps) => {
+
+  const { activeCategory } = ownProps;
+
+  return activeCategory !== 'all' ? {
+    ...state,
+    post: {
+      ...state.post,
+      posts: state.post.posts.filter(post => post.category === activeCategory)
+    }
+  } : state;
+
+}
 
 /**
  * @description: `mapDispatchToProps` function to map actions to porps.
