@@ -27,7 +27,7 @@ class Post extends Component {
     title: 'title',
     author: 'author',
     category: 'category',
-    VoteScore: 'VoteScore',
+    voteScore: 'voteScore',
     timestamp: 'timestamp'
   }
 
@@ -48,7 +48,7 @@ class Post extends Component {
       category: {
         sortDirection: this.sortReset
       },
-      VoteScore: {
+      voteScore: {
         sortDirection: this.sortReset
       },
       timestamp: {
@@ -88,14 +88,13 @@ class Post extends Component {
   render() {
 
     const { posts } = this.props.post;
-    const { title, author, category, VoteScore, timestamp } = this.state.sortingHeaders;
+    const { title, author, category, voteScore, timestamp } = this.state.sortingHeaders;
 
     return (
 
       <div className='posts--container'>
 
         <div className='post--container post--headers'>
-
 
           <div className='flex--row--class post--item--a post--item'
             onClick={
@@ -105,68 +104,53 @@ class Post extends Component {
             }
           >
             <div>Title</div>
-            <div className='flex--column--class'>
-              {
-                ((title.sortDirection === this.sortReset) || (title.sortDirection === this.sortDescending)) && (
-                  <div className='arrow--drop--up'>
-                    <MdArrowDropUp />
-                  </div>
-                )
-              }
-              {
-                ((title.sortDirection === this.sortReset) || (title.sortDirection === this.sortAscending)) && (
-                  <div className='arrow--drop--down'>
-                    <MdArrowDropDown />
-                  </div>
-                )
-              }
+            <SortingSymbol column={title} />
+          </div>
 
-            </div>
-          </div>
-          <div className='flex--row--class post--item--b post--item'>
+          <div className='flex--row--class post--item--b post--item'
+            onClick={
+              () => {
+                this.sortColumn(this.gridHeaders.author)
+              }
+            }
+          >
             <div>Author</div>
-            <div className='flex--column--class'>
-              <div className='arrow--drop--up'>
-                <MdArrowDropUp />
-              </div>
-              <div className='arrow--drop--down'>
-                <MdArrowDropDown />
-              </div>
-            </div>
+            <SortingSymbol column={author} />
           </div>
-          <div className='flex--row--class post--item--b post--item'>
+
+          <div className='flex--row--class post--item--b post--item'
+            onClick={
+              () => {
+                this.sortColumn(this.gridHeaders.category)
+              }
+            }
+          >
             <div>Category</div>
-            <div className='flex--column--class'>
-              <div className='arrow--drop--up'>
-                <MdArrowDropUp />
-              </div>
-              <div className='arrow--drop--down'>
-                <MdArrowDropDown />
-              </div>
-            </div>
+            <SortingSymbol column={category} />
           </div>
-          <div className='flex--row--class post--item--c post--item'>
+
+          <div className='flex--row--class post--item--c post--item'
+            onClick={
+              () => {
+                this.sortColumn(this.gridHeaders.voteScore)
+              }
+            }
+          >
             <div>VoteScore</div>
-            <div className='flex--column--class'>
-              <div className='arrow--drop--up'>
-                <MdArrowDropUp />
-              </div>
-              <div className='arrow--drop--down'>
-                <MdArrowDropDown />
-              </div>
-            </div>
+            <SortingSymbol column={voteScore} />
           </div>
-          <div className='flex--row--class post--item--b post--item'>
+
+          <div className='flex--row--class post--item--b post--item'
+            onClick={
+              () => {
+                this.sortColumn(this.gridHeaders.timestamp)
+              }
+            }
+          >
             <div>Timestamp</div>
-            <div className='flex--column--class'>
-              <div className='arrow--drop--up'>
-                <MdArrowDropUp />
-              </div>
-              <div className='arrow--drop--down'>
-                <MdArrowDropDown />
-              </div>
-            </div>
+            <SortingSymbol column={timestamp} />
           </div>
+
           <div className='post--item--b post--item'>Actions</div>
         </div>
 
