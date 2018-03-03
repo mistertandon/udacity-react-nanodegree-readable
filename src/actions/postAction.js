@@ -4,6 +4,7 @@ export const ADD_POSTS = 'ADD_POSTS';
 export const POST_DETAIL = 'POST_DETAIL';
 export const ADD_POST = 'ADD_POST';
 export const EDIT_POST = 'EDIT_POST';
+export const SORT_POSTS = 'SORT_POSTS';
 
 function addPostsAction(posts) {
 
@@ -60,3 +61,11 @@ export const editPost = (post) => {
   return dispatch => API.editPost(post)
     .then(responsePost => dispatch(editPostAction(responsePost)))
 }
+
+export const sortPosts = (sortOrder, column) => (
+  {
+    type: SORT_POSTS,
+    sortOrder: sortOrder,
+    column: column
+  }
+)

@@ -15,6 +15,7 @@ import { comment } from './reducers/comment'
 
 import App from './components/App'
 
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const appReducers = combineReducers({
   category,
   post,
@@ -23,7 +24,9 @@ const appReducers = combineReducers({
 
 const store = createStore(
   appReducers,
-  applyMiddleware(thunk)
+  composeEnhancer(
+    applyMiddleware(thunk)
+  )
 )
 
 ReactDOM.render(<BrowserRouter><Provider store={store}><App /></Provider></BrowserRouter>, document.getElementById('root'));

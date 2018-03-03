@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class CurrentSortingOrder {
+export default class SortingSymbol {
 
   render() {
     return (

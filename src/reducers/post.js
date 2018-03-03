@@ -1,8 +1,11 @@
+import sortBy from 'sort-by'
+
 import {
   ADD_POSTS,
   POST_DETAIL,
   ADD_POST,
-  EDIT_POST
+  EDIT_POST,
+  SORT_POSTS
 } from './../actions/postAction'
 
 import {
@@ -42,6 +45,11 @@ export function post(state = {}, action) {
     case EDIT_POST: return {
       ...state,
       posts: state.posts.filter(post => post.id !== action.edited_post.id).concat([action.edited_post])
+    }
+
+    case SORT_POSTS: return {
+      ...state,
+      posts: state.posts.sort(sortBy(`${action.sortOrder}${action.column}`)).slice(0)
     }
 
     default: return state;

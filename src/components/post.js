@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Link } from 'react-router-dom'
-import sortBy from 'sort-by'
 import moment from 'moment';
 import 'moment/locale/de';
 
@@ -13,7 +12,12 @@ import MdArrowDropDown from 'react-icons/lib/md/arrow-drop-down'
 
 import './../css/post.css'
 
-import { addPosts } from './../actions/postAction'
+import {
+  addPosts,
+  sortPosts
+} from './../actions/postAction'
+
+import SortingSymbol from './sortingSymbol'
 
 class Post extends Component {
 
@@ -29,7 +33,7 @@ class Post extends Component {
 
   sortReset = 'reset';
 
-  sortAscending = '+';
+  sortAscending = '';
 
   sortDescending = '-';
 
@@ -58,25 +62,27 @@ class Post extends Component {
     this.props.dispatchAddPosts();
   }
 
-  sortColumn = (columnName) => {
+  sortColumn = (column) => {
 
     let reqSortingDirectionSymbol;
     let stateClone = Object.assign({}, this.state);
 
-    reqSortingDirectionSymbol = stateClone.sortingHeaders[columnName].sortDirection === this.sortReset
+    reqSortingDirectionSymbol = stateClone.sortingHeaders[column].sortDirection === this.sortReset
       ? this.sortAscending
-      : stateClone.sortingHeaders[columnName].sortDirection === this.sortAscending
-        ? this.sortDescending
-        : this.sortAscending;
+      : stateClone.sortingHeaders[column].sortDirection === this.sortDescending
+        ? this.sortAscending
+        : this.sortDescending;
 
     for (var headerName in stateClone.sortingHeaders) {
 
       stateClone.sortingHeaders[headerName].sortDirection = this.sortReset
     }
 
-    stateClone.sortingHeaders[columnName].sortDirection = reqSortingDirectionSymbol;
+    stateClone.sortingHeaders[column].sortDirection = reqSortingDirectionSymbol;
 
     this.setState((state) => (stateClone));
+
+    this.props.dispatchSortPosts(reqSortingDirectionSymbol, column)
   }
 
   render() {
@@ -170,17 +176,18 @@ class Post extends Component {
            */
           posts && posts.length && posts.map((post, index) => (
 
-            <div key={`post_info_${index}`} className='post--container'>
+            <div key={`post_info_${post.id}`} className='post--container'>
 
-              <div key={`post_title_${index}`} className='post--item--a post--item'>
+              <div key={`post_title_${post.id}`} className='post--item--a post--item'>
                 {post.title}
               </div>
-              <div key={`post_author_${index}`} className='post--item--b post--item'>{post.author}</div>
-              <div key={`post_category_${index}`} className='post--item--b post--item'>{post.category}</div>
-              <div key={`post_vote_score_${index}`} className='post--item--c post--item'>{post.voteScore}</div>
-              <div key={`post_timestamp_${index}`} className='post--item--b post--item'>{moment(post.timestamp).format('DD-MM-YYYY')}</div>
+              <div key={`post_author_${post.id}`} className='post--item--b post--item'>{post.author}</div>
+              <div key={`post_category_${post.id}`} className='post--item--b post--item'>{post.category}</div>
+              <div key={`post_vote_score_${post.id}`} className='post--item--c post--item'>{post.voteScore}</div>
+              <div key={`post_timestamp_${post.id}`} className='post--item--b post--item'>{moment(post.timestamp).format('DD-MM-YYYY')}</div>
 
-              <div key={`post_actions_${index}`} className='post--item--b post--item'>
+              <div key={`post_actions_${post.id}`} className='post--item--b post--item'>
+
                 <Link to={
                   {
                     pathname: '/createPost/',
@@ -218,7 +225,7 @@ class Post extends Component {
 const mapStateToProps = (state, ownProps) => {
 
   const { activeCategory } = ownProps;
-
+  console.log(activeCategory);
   return activeCategory !== 'all' ? {
     ...state,
     post: {
@@ -234,13 +241,15 @@ const mapStateToProps = (state, ownProps) => {
  * @param {Function} dispatch
  * @returns {Object} Mapped object with dispatch actions.
  */
-function mapDispatchToProps(dispatch) {
-
-  return {
+const mapDispatchToProps = (dispatch) => (
+  {
     dispatchAddPosts: () => {
       dispatch(addPosts())
+    },
+    dispatchSortPosts: (sortOrder, column) => {
+      dispatch(sortPosts(sortOrder, column))
     }
   }
-}
+)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Post);
