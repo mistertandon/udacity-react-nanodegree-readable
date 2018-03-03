@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Link } from 'react-router-dom'
+import moment from 'moment';
+import 'moment/locale/de';
 
 import MdDelete from 'react-icons/lib/md/delete'
 import MdEdit from 'react-icons/lib/md/edit'
 import FaEye from 'react-icons/lib/fa/eye'
+import MdArrowDropUp from 'react-icons/lib/md/arrow-drop-up'
+import MdArrowDropDown from 'react-icons/lib/md/arrow-drop-down'
 
 import './../css/post.css'
 
@@ -13,6 +17,8 @@ import { addPosts } from './../actions/postAction'
 class Post extends Component {
 
   iconDefaultSize = 22;
+
+  getDate = new Date();
 
   state = {
     activeCategory: '',
@@ -33,11 +39,62 @@ class Post extends Component {
       <div className='posts--container'>
 
         <div className='post--container post--headers'>
-          <div className='post--item--a post--item'>Title</div>
-          <div className='post--item--b post--item'>Author</div>
-          <div className='post--item--b post--item'>Category</div>
-          <div className='post--item--c post--item'>VoteScore</div>
-          <div className='post--item--b post--item'>Timestamp</div>
+
+          <div className='flex--row--class post--item--a post--item'>
+            <div>Title</div>
+            <div className='flex--column--class'>
+              <div className='arrow--drop--up'>
+                <MdArrowDropUp />
+              </div>
+              <div className='arrow--drop--down'>
+                <MdArrowDropDown />
+              </div>
+            </div>
+          </div>
+          <div className='flex--row--class post--item--b post--item'>
+            <div>Author</div>
+            <div className='flex--column--class'>
+              <div className='arrow--drop--up'>
+                <MdArrowDropUp />
+              </div>
+              <div className='arrow--drop--down'>
+                <MdArrowDropDown />
+              </div>
+            </div>
+          </div>
+          <div className='flex--row--class post--item--b post--item'>
+            <div>Category</div>
+            <div className='flex--column--class'>
+              <div className='arrow--drop--up'>
+                <MdArrowDropUp />
+              </div>
+              <div className='arrow--drop--down'>
+                <MdArrowDropDown />
+              </div>
+            </div>
+          </div>
+          <div className='flex--row--class post--item--c post--item'>
+            <div>VoteScore</div>
+            <div className='flex--column--class'>
+              <div className='arrow--drop--up'>
+                <MdArrowDropUp />
+              </div>
+              <div className='arrow--drop--down'>
+                <MdArrowDropDown />
+              </div>
+            </div>
+          </div>
+          <div className='flex--row--class post--item--b post--item'>
+            <div>Timestamp</div>
+            <div className='flex--column--class'>
+              <div className='arrow--drop--up'>
+                <MdArrowDropUp />
+              </div>
+              <div className='arrow--drop--down'>
+                <MdArrowDropDown />
+              </div>
+            </div>
+          </div>
           <div className='post--item--b post--item'>Actions</div>
         </div>
 
@@ -50,12 +107,12 @@ class Post extends Component {
             <div key={`post_info_${index}`} className='post--container'>
 
               <div key={`post_title_${index}`} className='post--item--a post--item'>
-                <Link to={`/postDetail/${post.id}`} >{post.title}</Link>
+                {post.title}
               </div>
               <div key={`post_author_${index}`} className='post--item--b post--item'>{post.author}</div>
               <div key={`post_category_${index}`} className='post--item--b post--item'>{post.category}</div>
               <div key={`post_vote_score_${index}`} className='post--item--c post--item'>{post.voteScore}</div>
-              <div key={`post_timestamp_${index}`} className='post--item--b post--item'>{post.timestamp}</div>
+              <div key={`post_timestamp_${index}`} className='post--item--b post--item'>{moment(post.timestamp).format('DD-MM-YYYY')}</div>
 
               <div key={`post_actions_${index}`} className='post--item--b post--item'>
                 <Link to={
@@ -70,7 +127,10 @@ class Post extends Component {
                 }>
                   <MdEdit size={this.iconDefaultSize} />
                 </Link>&nbsp;&nbsp;
-                <FaEye size={this.iconDefaultSize} />&nbsp;
+                <Link to={`/postDetail/${post.id}`} >
+                  <FaEye size={this.iconDefaultSize} />
+                </Link>
+                &nbsp;
                 <MdDelete size={this.iconDefaultSize} />
 
               </div>

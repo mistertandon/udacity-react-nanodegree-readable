@@ -7,6 +7,8 @@ import MdDelete from 'react-icons/lib/md/delete'
 import MdEdit from 'react-icons/lib/md/edit'
 import FaThumbsUp from 'react-icons/lib/fa/thumbs-up'
 import FaThumbsDown from 'react-icons/lib/fa/thumbs-down'
+import FaHeart from 'react-icons/lib/fa/heart'
+import FaHeartO from 'react-icons/lib/fa/heart-o'
 
 import './../css/comment.css'
 import './../css/modal.css'
@@ -131,7 +133,8 @@ class Comment extends Component {
                     <div key={`comment_content_${comment.id}`} className='comment--content'>{comment.body}</div>
 
                     <div key={`comment_vote_${comment.id}`} className='comment--vote'>
-                      {comment.voteScore}&nbsp;{comment.voteScore < 0 ? <FaThumbsDown /> : <FaThumbsUp />} &nbsp;
+                      {comment.voteScore}&nbsp;
+                      {comment.voteScore < 0 ? <FaHeartO /> : <FaHeart />} &nbsp;
                     </div>
 
                     <div key={`comment_actions_edit_${comment.id}`} className='comment--actions--edit'>

@@ -5,6 +5,8 @@ import { Router, Link } from 'react-router-dom'
 import MdDelete from 'react-icons/lib/md/delete'
 import MdEdit from 'react-icons/lib/md/edit'
 import FaHeart from 'react-icons/lib/fa/heart'
+import FaHeartO from 'react-icons/lib/fa/heart-o'
+
 import MdChevronLeft from 'react-icons/lib/md/chevron-left'
 import MdChevronRight from 'react-icons/lib/md/chevron-right'
 import MdThumbDown from 'react-icons/lib/md/thumb-down'
@@ -66,7 +68,6 @@ class PostDetail extends Component {
               <div className='post--item--author post--detail--third--row'>
                 Written by: {postDetail.author},&nbsp;{new Date(postDetail.timestamp).toISOString()}
               </div>
-
 
               <div className='post--item--thumb-down post--detail--third--row'>
                 <MdThumbUp size={this.iconSize} />

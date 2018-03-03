@@ -1,5 +1,5 @@
 .comments--container{
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
@@ -7,7 +7,6 @@
 .comment--header{
   margin-top: 20px;
   min-height: 50px;
-  padding-left: 8%;
 }
 
 .comment--container{
@@ -16,7 +15,6 @@
   flex-direction: column;
   align-content: center;
   border-bottom: 1px double #C7C7C7;
-  margin-left: 8%;
   margin-bottom: 10px;
 }
 
@@ -29,14 +27,21 @@
 
 .comment--content{
   flex-grow: 1;
+
   font-family: 'Marck Script';
 }
 
 .comment--vote{
+  min-width: 40px;
+  max-width: 40px;
+  width: 40px;
   flex-grow: 0.05;
 }
 
 .comment--actions--edit, .comment--actions--delete{
+  min-width: 25px;
+  max-width: 25px;
+  width: 25px;
   flex-grow: 0.03;
 }
 
@@ -48,8 +53,7 @@
 }
 
 .comment--add--container{
-  width: 90%;
-  margin-left: 8%;
+  width: 100%;
 }
 
 .comment--add{

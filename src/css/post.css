@@ -1,3 +1,13 @@
+.flex--column--class{
+  display:flex;
+  flex-direction: column;
+}
+
+.flex--row--class{
+  display:flex;
+  flex-direction: row;
+}
+
 .posts--container{
   display:flex;
   flex-direction: column;
@@ -23,14 +33,23 @@
   max-width: 400px;
 }
 
+.arrow--drop--up{
+  margin-bottom: -11px;
+  margin-top: -5px;
+}
+
+.arrow--drop--down{
+
+}
+
 .post--item--b{
-  width: 150px;
-  max-width: 150px;
+  width: 140px;
+  max-width: 140px;
 }
 
 .post--item--c{
-  width: 100px;
-  max-width: 100px;
+  width: 140px;
+  max-width: 140px;
 }
 
 .post--headers{
