@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, Link } from 'react-router-dom'
+import sortBy from 'sort-by'
 import moment from 'moment';
 import 'moment/locale/de';
 
@@ -18,11 +19,38 @@ class Post extends Component {
 
   iconDefaultSize = 22;
 
-  getDate = new Date();
+  gridHeaders = {
+    title: 'title',
+    author: 'author',
+    category: 'category',
+    VoteScore: 'VoteScore',
+    timestamp: 'timestamp'
+  }
+
+  sortReset = 'reset';
+
+  sortAscending = '+';
+
+  sortDescending = '-';
 
   state = {
-    activeCategory: '',
-    posts: []
+    sortingHeaders: {
+      title: {
+        sortDirection: this.sortReset
+      },
+      author: {
+        sortDirection: this.sortReset
+      },
+      category: {
+        sortDirection: this.sortReset
+      },
+      VoteScore: {
+        sortDirection: this.sortReset
+      },
+      timestamp: {
+        sortDirection: this.sortReset
+      }
+    }
   }
 
   componentDidMount() {
@@ -30,9 +58,31 @@ class Post extends Component {
     this.props.dispatchAddPosts();
   }
 
+  sortColumn = (columnName) => {
+
+    let reqSortingDirectionSymbol;
+    let stateClone = Object.assign({}, this.state);
+
+    reqSortingDirectionSymbol = stateClone.sortingHeaders[columnName].sortDirection === this.sortReset
+      ? this.sortAscending
+      : stateClone.sortingHeaders[columnName].sortDirection === this.sortAscending
+        ? this.sortDescending
+        : this.sortAscending;
+
+    for (var headerName in stateClone.sortingHeaders) {
+
+      stateClone.sortingHeaders[headerName].sortDirection = this.sortReset
+    }
+
+    stateClone.sortingHeaders[columnName].sortDirection = reqSortingDirectionSymbol;
+
+    this.setState((state) => (stateClone));
+  }
+
   render() {
 
     const { posts } = this.props.post;
+    const { title, author, category, VoteScore, timestamp } = this.state.sortingHeaders;
 
     return (
 
@@ -40,15 +90,31 @@ class Post extends Component {
 
         <div className='post--container post--headers'>
 
-          <div className='flex--row--class post--item--a post--item'>
+
+          <div className='flex--row--class post--item--a post--item'
+            onClick={
+              () => {
+                this.sortColumn(this.gridHeaders.title)
+              }
+            }
+          >
             <div>Title</div>
             <div className='flex--column--class'>
-              <div className='arrow--drop--up'>
-                <MdArrowDropUp />
-              </div>
-              <div className='arrow--drop--down'>
-                <MdArrowDropDown />
-              </div>
+              {
+                ((title.sortDirection === this.sortReset) || (title.sortDirection === this.sortDescending)) && (
+                  <div className='arrow--drop--up'>
+                    <MdArrowDropUp />
+                  </div>
+                )
+              }
+              {
+                ((title.sortDirection === this.sortReset) || (title.sortDirection === this.sortAscending)) && (
+                  <div className='arrow--drop--down'>
+                    <MdArrowDropDown />
+                  </div>
+                )
+              }
+
             </div>
           </div>
           <div className='flex--row--class post--item--b post--item'>
