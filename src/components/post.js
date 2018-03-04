@@ -209,7 +209,7 @@ class Post extends Component {
 const mapStateToProps = (state, ownProps) => {
 
   const { activeCategory } = ownProps;
-  console.log(activeCategory);
+
   return activeCategory !== 'all' ? {
     ...state,
     post: {

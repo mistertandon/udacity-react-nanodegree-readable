@@ -5,7 +5,8 @@ import {
   POST_DETAIL,
   ADD_POST,
   EDIT_POST,
-  SORT_POSTS
+  SORT_POSTS,
+  LIKE_POST
 } from './../actions/postAction'
 
 import {
@@ -15,16 +16,19 @@ import {
 const state = {
   posts: [],
   postDetail: {},
-  comments: []
+  comments: [],
+  postsVoting: []
 }
 
 export function post(state = {}, action) {
+
+  console.log(state);
 
   switch (action.type) {
 
     case ADD_POSTS: return {
       ...state,
-      posts: action.posts.slice(0)
+      posts: action.posts.slice(0),
     }
 
     case POST_DETAIL: return {
@@ -50,6 +54,22 @@ export function post(state = {}, action) {
     case SORT_POSTS: return {
       ...state,
       posts: state.posts.sort(sortBy(`${action.sortOrder}${action.column}`)).slice(0)
+    }
+
+    case LIKE_POST: return {
+      ...state,
+      posts: state.posts.filter(post => post.id !== action.post.id).concat([action.post]),
+      postsVoting: (typeof state.postsVoting === 'undefined')
+        ? [{ id: action.post.id, value: action.voteType }]
+        : state.postsVoting.filter(postPartialInfo => postPartialInfo.id !== action.post.id).concat(
+          [
+            {
+              id: action.post.id,
+              value: action.voteType
+            }
+          ]
+        ),
+      postDetail: action.post
     }
 
     default: return state;

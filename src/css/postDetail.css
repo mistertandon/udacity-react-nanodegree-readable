@@ -53,14 +53,7 @@
   width: 25px;
 }
 
-.post--item--thumb-down{
-  flex-grow: 0.06;
-  min-width: 40px;
-  max-width: 40px;
-  width: 40px;
-}
-
-.post--item--thumb--up{
+.post--item--thumb--up--down{
   flex-grow: 0.06;
   min-width: 40px;
   max-width: 40px;

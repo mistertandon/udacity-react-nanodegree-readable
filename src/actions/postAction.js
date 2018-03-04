@@ -5,6 +5,7 @@ export const POST_DETAIL = 'POST_DETAIL';
 export const ADD_POST = 'ADD_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const SORT_POSTS = 'SORT_POSTS';
+export const LIKE_POST = 'LIKE_POST';
 
 function addPostsAction(posts) {
 
@@ -69,3 +70,18 @@ export const sortPosts = (sortOrder, column) => (
     column: column
   }
 )
+
+export const likePostAction = (post, voteType) => {
+
+  return {
+    type: LIKE_POST,
+    post: post,
+    voteType: voteType
+  }
+}
+
+export const likePost = (id, voteType) => {
+
+  return dispatch => API.likePost(id, voteType)
+    .then(response => dispatch(likePostAction(response, voteType)))
+}

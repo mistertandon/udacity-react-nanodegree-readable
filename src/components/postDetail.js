@@ -2,21 +2,31 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Router, Link } from 'react-router-dom'
 
+import MdAddCircle from 'react-icons/lib/md/add-circle'
+import MdChevronLeft from 'react-icons/lib/md/chevron-left'
+import MdChevronRight from 'react-icons/lib/md/chevron-right'
+
 import MdDelete from 'react-icons/lib/md/delete'
 import MdEdit from 'react-icons/lib/md/edit'
 import FaHeart from 'react-icons/lib/fa/heart'
 import FaHeartO from 'react-icons/lib/fa/heart-o'
 
-import MdChevronLeft from 'react-icons/lib/md/chevron-left'
-import MdChevronRight from 'react-icons/lib/md/chevron-right'
-import MdThumbDown from 'react-icons/lib/md/thumb-down'
 import MdThumbUp from 'react-icons/lib/md/thumb-up'
-import MdAddCircle from 'react-icons/lib/md/add-circle'
+import MdThumbDown from 'react-icons/lib/md/thumb-down'
+import TiThumbsUp from 'react-icons/lib/ti/thumbs-up'
+import TiThumbsDown from 'react-icons/lib/ti/thumbs-down'
 
 import './../css/postDetail.css'
 
-import { getPost } from './../actions/postAction'
+import {
+  getPost,
+  likePost
+} from './../actions/postAction'
+
 import { getPostComments } from './../actions/commentAction'
+
+import PostThumbUp from './postThumbUp'
+import PostThumbDown from './postThumbDown'
 
 import Comment from './../components/comment'
 
@@ -29,14 +39,20 @@ class PostDetail extends Component {
     this.props.dispatchGetPost();
   }
 
+  reqPostThumbUpOrDown = (id, voteType) => {
+
+    this.props.dispatchLikePost(id, voteType);
+  }
+
   render() {
 
-    const { postDetail } = this.props.post;
+    const { postDetail, postsVotingMod } = this.props.post;
     const { id } = this.props.match.params
 
     return (
 
       <div className='post--detail--container'>
+
         <div className='post--add--new'>
           <Link to={
             {
@@ -69,12 +85,18 @@ class PostDetail extends Component {
                 Written by: {postDetail.author},&nbsp;{new Date(postDetail.timestamp).toISOString()}
               </div>
 
-              <div className='post--item--thumb-down post--detail--third--row'>
-                <MdThumbUp size={this.iconSize} />
-              </div>
-              <div className='post--item--thumb--up post--detail--third--row'>
-                <MdThumbDown size={this.iconSize} />
-              </div>
+              <PostThumbUp postDetailObj={postDetail}
+                postsVotingModObj={postsVotingMod}
+                reqPostThumbUpOrDownFunc={this.reqPostThumbUpOrDown}
+                iconSizeProperty={this.iconSize}
+              />
+
+              <PostThumbDown postDetailObj={postDetail}
+                postsVotingModObj={postsVotingMod}
+                reqPostThumbUpOrDownFunc={this.reqPostThumbUpOrDown}
+                iconSizeProperty={this.iconSize}
+              />
+
               <div className='post--item--edit post--detail--third--row'>
                 <MdEdit size={this.iconSize} />
               </div>
@@ -93,7 +115,21 @@ class PostDetail extends Component {
   }
 }
 
-const mapStateToProps = (state) => state
+const mapStateToProps = (state) => {
+
+  state.post.postsVotingMod = {};
+  console.log(state);
+  state.post.postsVoting && state.post.postsVoting.length > 0 && state.post.postsVoting.map(
+    (postsVote) => {
+
+      state.post.postsVotingMod[postsVote.id] = {
+        id: postsVote.id,
+        value: postsVote.value
+      }
+    })
+  console.log(state);
+  return state;
+}
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 
@@ -102,6 +138,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     dispatchGetPost: () => {
       dispatch(getPost(id))
+    },
+    dispatchLikePost: (id, voteType) => {
+      dispatch(likePost(id, voteType))
     }
   }
 }

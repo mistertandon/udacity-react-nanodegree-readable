@@ -105,3 +105,16 @@ export const editPost = (post) => {
   })
     .then(response => response.json())
 }
+
+export const likePost = (id, voteType) => {
+
+  return fetch(`${apiHost}posts/${id}`, {
+    'method': 'POST',
+    'headers': {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    'body': JSON.stringify({ option: voteType })
+  })
+    .then(response => response.json())
+}

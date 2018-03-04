@@ -19,14 +19,14 @@ class SortingSymbol extends Component {
       <div className='flex--column--class'>
 
         {
-          ((column.sortDirection === this.sortReset) || (column.sortDirection === this.sortDescending)) && (
+          ((column.sortDirection === this.sortReset) || (column.sortDirection === this.sortAscending)) && (
             <div className='arrow--drop--up'>
               <MdArrowDropUp />
             </div>
           )
         }
         {
-          ((column.sortDirection === this.sortReset) || (column.sortDirection === this.sortAscending)) && (
+          ((column.sortDirection === this.sortReset) || (column.sortDirection === this.sortDescending)) && (
             <div className='arrow--drop--down'>
               <MdArrowDropDown />
             </div>
