@@ -118,3 +118,16 @@ export const likePost = (id, voteType) => {
   })
     .then(response => response.json())
 }
+
+export const likeComment = (id, voteType) => {
+
+  return fetch(`${apiHost}comments/${id}`, {
+    'method': 'POST',
+    'headers': {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    'body': JSON.stringify({ option: voteType })
+  })
+    .then(response => response.json())
+}

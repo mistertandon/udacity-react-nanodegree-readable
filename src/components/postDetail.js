@@ -24,9 +24,8 @@ import {
 } from './../actions/postAction'
 
 import { getPostComments } from './../actions/commentAction'
-// C:\projects\04-readable-workspace\04_readable\src\components\
+
 import CustomThumbUp from './customThumbUp'
-// import PostThumbUp from './postThumbUp'
 import CustomThumbDown from './customThumbDown'
 
 import Comment from './../components/comment'
@@ -121,7 +120,7 @@ class PostDetail extends Component {
 const mapStateToProps = (state) => {
 
   state.post.postsVotingMod = {};
-  console.log(state);
+
   state.post.postsVoting && state.post.postsVoting.length > 0 && state.post.postsVoting.map(
     (postsVote) => {
 
@@ -130,7 +129,7 @@ const mapStateToProps = (state) => {
         value: postsVote.value
       }
     })
-  console.log(state);
+
   return state;
 }
 

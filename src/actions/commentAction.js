@@ -3,6 +3,7 @@ import API from './../utils/api'
 export const RETRIEVE_POST_COMMENTS = 'RETRIEVE_POST_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
+export const LIKE_COMMENT = 'LIKE_COMMENT';
 
 export const getPostCommentsAction = (comments) => {
 
@@ -29,11 +30,11 @@ export const getPostComments = (id) => {
  * @param {Object} resposneComment
  * @returns {Object}  `ADD_COMMENT` type action object.
  */
-export const addPostCommentAction = (resposneComment) => {
+export const addPostCommentAction = (resposneComments) => {
 
   return {
     type: ADD_COMMENT,
-    response_comment: resposneComment
+    comments: resposneComments
   }
 }
 
@@ -67,4 +68,18 @@ export const editPostComment = (commentObject) => {
 
   return (dispatch) => API.editPostComment(commentObject)
     .then(responseComment => dispatch(editPostCommentAction(responseComment)))
+}
+
+const likeCommentAction = (comment, voteType) => (
+  {
+    type: LIKE_COMMENT,
+    comment: comment,
+    voteType: voteType
+  }
+)
+
+export const likeComment = (id, voteType) => {
+
+  return dispatch => API.likeComment(id, voteType)
+    .then(responseComment => dispatch(likeCommentAction(responseComment, voteType)))
 }

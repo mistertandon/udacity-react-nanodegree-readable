@@ -31,6 +31,12 @@
   flex-grow: 1;
 }
 
+.comment--vote--up--down{
+  min-width: 40px;
+  max-width: 40px;
+  width: 40px;
+}
+
 .comment--vote{
   min-width: 95px;
   max-width: 95px;

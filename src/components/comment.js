@@ -8,10 +8,13 @@ import MdChevronLeft from 'react-icons/lib/md/chevron-left'
 import MdChevronRight from 'react-icons/lib/md/chevron-right'
 import MdDelete from 'react-icons/lib/md/delete'
 import MdEdit from 'react-icons/lib/md/edit'
-import FaThumbsUp from 'react-icons/lib/fa/thumbs-up'
-import FaThumbsDown from 'react-icons/lib/fa/thumbs-down'
 import FaHeart from 'react-icons/lib/fa/heart'
 import FaHeartO from 'react-icons/lib/fa/heart-o'
+import FaThumbsUp from 'react-icons/lib/fa/thumbs-up'
+import FaThumbsDown from 'react-icons/lib/fa/thumbs-down'
+
+import CustomThumbUp from './customThumbUp'
+import CustomThumbDown from './customThumbDown'
 
 import './../css/comment.css'
 import './../css/modal.css'
@@ -19,7 +22,8 @@ import './../css/modal.css'
 import {
   getPostComments,
   addPostComment,
-  editPostComment
+  editPostComment,
+  likeComment
 } from './../actions/commentAction'
 
 const customStyles = {
@@ -113,9 +117,13 @@ class Comment extends Component {
     this.closeCommentModal();
   }
 
+  reqCommentThumbUpOrDown = (id, voteType) => {
+    this.props.dispatchThumbUpOrDownComment(id, voteType)
+  }
+
   render() {
 
-    const { comments } = this.props.comment;
+    const { comments, commentsVotingMod } = this.props.comment;
     const { isCommentModalOpen, isAddOperation, isEditOperation, comment } = this.state;
 
     return (
@@ -140,6 +148,23 @@ class Comment extends Component {
                   <div key={`comment_info_${comment.id}`} className='comment--info'>
                     {`By ${comment.author} at ${new Date(comment.timestamp)}`}
                   </div>
+                  <div key={`comment_up_${comment.id}`}
+                    className='comment--vote--up--down'>
+                    <CustomThumbUp contentDetailObj={comment}
+                      votingModObj={commentsVotingMod}
+                      reqThumbUpOrDownFunc={this.reqCommentThumbUpOrDown}
+                      iconSizeProperty={this.iconSize}
+                    />
+                  </div>
+                  <div key={`comment_down_${comment.id}`}
+                    className='comment--vote--up--down'>
+                    <CustomThumbDown contentDetailObj={comment}
+                      votingModObj={commentsVotingMod}
+                      reqThumbUpOrDownFunc={this.reqCommentThumbUpOrDown}
+                      iconSizeProperty={this.iconSize}
+                    />
+                  </div>
+
                   <div key={`comment_vote_${comment.id}`} className='comment--vote'>
                     {comment.voteScore < 0 ? <FaHeartO /> : <FaHeart />} &nbsp;
                         <MdChevronLeft size={this.iconSize} />&nbsp;
@@ -285,7 +310,22 @@ class Comment extends Component {
   }
 }
 
-const mapStateToProps = (state) => state
+const mapStateToProps = (state) => {
+
+  state.comment.commentsVotingMod = {};
+
+  state.comment.commentsVoting && state.comment.commentsVoting.length > 0 && state.comment.commentsVoting.map(
+    (commentVote) => {
+
+      state.comment.commentsVotingMod[commentVote.id] = {
+        id: commentVote.id,
+        value: commentVote.value
+      }
+    })
+
+
+  return state;
+}
 
 const mapDispatchToProps = (dispatch, ownProps) => {
 
@@ -300,6 +340,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     dispactEditPostComment: (commentObj) => {
       dispatch(editPostComment(commentObj))
+    },
+    dispatchThumbUpOrDownComment: (id, voteType) => {
+      dispatch(likeComment(id, voteType))
     }
   }
 }

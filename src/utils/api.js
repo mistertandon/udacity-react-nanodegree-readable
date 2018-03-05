@@ -7,7 +7,8 @@ import {
   editPostComment,
   addPost,
   editPost,
-  likePost
+  likePost,
+  likeComment
 } from './../utils/apiEndPoints'
 
 export default {
@@ -19,5 +20,6 @@ export default {
   editPostComment,
   addPost,
   editPost,
-  likePost
+  likePost,
+  likeComment
 }
