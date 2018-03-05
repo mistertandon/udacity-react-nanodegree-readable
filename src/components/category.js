@@ -21,8 +21,7 @@ class Category extends Component {
 
       <div className="category--container">
 
-        <div className='category--item'
-          key={'all--category'}>
+        <div className='category--item'>
           <Link to={
             {
               pathname: '/category',

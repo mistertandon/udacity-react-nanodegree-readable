@@ -26,6 +26,7 @@ import {
 } from './../actions/postAction'
 
 import SortingSymbol from './sortingSymbol'
+import PostGridHeader from './postGridHeader'
 
 class Post extends Component {
 
@@ -109,7 +110,7 @@ class Post extends Component {
   render() {
 
     const { posts, postsVotingMod } = this.props.post;
-    const { title, author, category, voteScore, timestamp } = this.state.sortingHeaders;
+    const { title, author, category, voteScore, commentCount, timestamp } = this.state.sortingHeaders;
 
     return (
 
@@ -117,69 +118,47 @@ class Post extends Component {
 
         <div className='post--container post--headers'>
 
-          <div className='flex--row--class post--item--a post--item'
-            onClick={
-              () => {
-                this.sortColumn(this.gridHeaders.title)
-              }
-            }
-          >
-            <div>Title</div>
-            <SortingSymbol column={title} />
-          </div>
+          <PostGridHeader parentDivClassName='flex--row--class post--item--a post--item'
+            headerKey={this.gridHeaders.title}
+            headerTitle='Title'
+            headerSortingInfo={title}
+            sortColumnFunc={this.sortColumn}
+          />
 
-          <div className='flex--row--class post--item--b post--item'
-            onClick={
-              () => {
-                this.sortColumn(this.gridHeaders.author)
-              }
-            }
-          >
-            <div>Author</div>
-            <SortingSymbol column={author} />
-          </div>
+          <PostGridHeader parentDivClassName='flex--row--class post--item--b post--item'
+            headerKey={this.gridHeaders.author}
+            headerTitle='Author'
+            headerSortingInfo={author}
+            sortColumnFunc={this.sortColumn}
+          />
 
-          <div className='flex--row--class post--item--b post--item'
-            onClick={
-              () => {
-                this.sortColumn(this.gridHeaders.category)
-              }
-            }
-          >
-            <div>Category</div>
-            <SortingSymbol column={category} />
-          </div>
+          <PostGridHeader parentDivClassName='flex--row--class post--item--b post--item'
+            headerKey={this.gridHeaders.category}
+            headerTitle='Category'
+            headerSortingInfo={category}
+            sortColumnFunc={this.sortColumn}
+          />
 
-          <div className='flex--row--class post--item--c post--item'
-            onClick={
-              () => {
-                this.sortColumn(this.gridHeaders.voteScore)
-              }
-            }
-          >
-            <div>VoteScore</div>
-            <SortingSymbol column={voteScore} />
-          </div>
+          <PostGridHeader parentDivClassName='flex--row--class post--item--c post--item'
+            headerKey={this.gridHeaders.voteScore}
+            headerTitle='Vote Score'
+            headerSortingInfo={voteScore}
+            sortColumnFunc={this.sortColumn}
+          />
 
-          <div className='flex--row--class post--item--f post--item'
-            onClick={() => {
+          <PostGridHeader parentDivClassName='flex--row--class post--item--f post--item'
+            headerKey={this.gridHeaders.commentCount}
+            headerTitle='Comments'
+            headerSortingInfo={commentCount}
+            sortColumnFunc={this.sortColumn}
+          />
 
-              this.sortColumn(this.gridHeaders.commentCount)
-            }}
-          >
-            <div>Comments</div>
-            <SortingSymbol column={voteScore} />
-          </div>
-          <div className='flex--row--class post--item--d post--item'
-            onClick={
-              () => {
-                this.sortColumn(this.gridHeaders.timestamp)
-              }
-            }
-          >
-            <div>Timestamp</div>
-            <SortingSymbol column={timestamp} />
-          </div>
+          <PostGridHeader parentDivClassName='flex--row--class post--item--d post--item'
+            headerKey={this.gridHeaders.timestamp}
+            headerTitle='Timestamp'
+            headerSortingInfo={timestamp}
+            sortColumnFunc={this.sortColumn}
+          />
 
           <div className='post--item--e post--item'>Actions</div>
 
