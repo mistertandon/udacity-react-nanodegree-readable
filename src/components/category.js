@@ -20,10 +20,24 @@ class Category extends Component {
     return (
 
       <div className="category--container">
+
+        <div className='category--item'
+          key={'all--category'}>
+          <Link to={
+            {
+              pathname: '/category',
+              state: {
+                activeCategory: 'all'
+              }
+            }
+          }>All</Link>
+        </div>
+
         {
           categories && categories.length && categories.map(
             (category, index) =>
               (
+
                 <div className='category--item'
                   key={`${index}_category`}>
                   <Link to={
