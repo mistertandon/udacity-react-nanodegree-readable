@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import serializeForm from 'form-serialize'
 import uuid from 'uuid'
+
+import MdChevronLeft from 'react-icons/lib/md/chevron-left'
+import MdChevronRight from 'react-icons/lib/md/chevron-right'
 import MdDelete from 'react-icons/lib/md/delete'
 import MdEdit from 'react-icons/lib/md/edit'
 import FaThumbsUp from 'react-icons/lib/fa/thumbs-up'
@@ -32,6 +35,8 @@ const customStyles = {
 };
 
 class Comment extends Component {
+
+  iconSize = 22;
 
   state = {
     isCommentModalOpen: false,
@@ -129,40 +134,38 @@ class Comment extends Component {
                 <div key={`comment_container_${comment.id}`} className='comment--container'>
 
                   <div key={`comment_body_${comment.id}`} className='comment--body'>
-
-                    <div key={`comment_content_${comment.id}`} className='comment--content'>{comment.body}</div>
-
-                    <div key={`comment_vote_${comment.id}`} className='comment--vote'>
-                      {comment.voteScore}&nbsp;
-                      {comment.voteScore < 0 ? <FaHeartO /> : <FaHeart />} &nbsp;
-                    </div>
-
-                    <div key={`comment_actions_edit_${comment.id}`} className='comment--actions--edit'>
-                      <MdEdit onClick={
-                        () => {
-                          this.openCommentModalForEdit(comment)
-                        }
-                      }
-                        size={22}
-                      />
-                    </div>
-
-                    <div key={`comment_actions_delete_${comment.id}`} className='comment--actions--delete'>
-                      <MdDelete onClick={
-                        () => {
-                          this.setState(() => ({ comment: comment }))
-                        }
-                      }
-                        size={22}
-                      />
-                    </div>
-
+                    {comment.body}
                   </div>
 
                   <div key={`comment_info_${comment.id}`} className='comment--info'>
                     {`By ${comment.author} at ${new Date(comment.timestamp)}`}
                   </div>
+                  <div key={`comment_vote_${comment.id}`} className='comment--vote'>
+                    {comment.voteScore < 0 ? <FaHeartO /> : <FaHeart />} &nbsp;
+                        <MdChevronLeft size={this.iconSize} />&nbsp;
+                    {comment.voteScore}&nbsp;
+                        <MdChevronRight size={this.iconSize} />
+                  </div>
 
+                  <div key={`comment_actions_edit_${comment.id}`} className='comment--actions--edit'>
+                    <MdEdit onClick={
+                      () => {
+                        this.openCommentModalForEdit(comment)
+                      }
+                    }
+                      size={this.iconSize}
+                    />
+                  </div>
+
+                  <div key={`comment_actions_delete_${comment.id}`} className='comment--actions--delete'>
+                    <MdDelete onClick={
+                      () => {
+                        this.setState(() => ({ comment: comment }))
+                      }
+                    }
+                      size={this.iconSize}
+                    />
+                  </div>
                 </div>
               </div>
             ))

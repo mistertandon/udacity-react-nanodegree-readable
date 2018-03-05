@@ -24,9 +24,10 @@ import {
 } from './../actions/postAction'
 
 import { getPostComments } from './../actions/commentAction'
-
-import PostThumbUp from './postThumbUp'
-import PostThumbDown from './postThumbDown'
+// C:\projects\04-readable-workspace\04_readable\src\components\
+import CustomThumbUp from './customThumbUp'
+// import PostThumbUp from './postThumbUp'
+import CustomThumbDown from './customThumbDown'
 
 import Comment from './../components/comment'
 
@@ -84,18 +85,20 @@ class PostDetail extends Component {
               <div className='post--item--author post--detail--third--row'>
                 Written by: {postDetail.author},&nbsp;{new Date(postDetail.timestamp).toISOString()}
               </div>
-
-              <PostThumbUp postDetailObj={postDetail}
-                postsVotingModObj={postsVotingMod}
-                reqPostThumbUpOrDownFunc={this.reqPostThumbUpOrDown}
-                iconSizeProperty={this.iconSize}
-              />
-
-              <PostThumbDown postDetailObj={postDetail}
-                postsVotingModObj={postsVotingMod}
-                reqPostThumbUpOrDownFunc={this.reqPostThumbUpOrDown}
-                iconSizeProperty={this.iconSize}
-              />
+              <div className='post--item--thumb--up--down post--detail--third--row'>
+                <CustomThumbUp contentDetailObj={postDetail}
+                  votingModObj={postsVotingMod}
+                  reqThumbUpOrDownFunc={this.reqPostThumbUpOrDown}
+                  iconSizeProperty={this.iconSize}
+                />
+              </div>
+              <div className='post--item--thumb--up--down post--detail--third--row'>
+                <CustomThumbDown contentDetailObj={postDetail}
+                  votingModObj={postsVotingMod}
+                  reqThumbUpOrDownFunc={this.reqPostThumbUpOrDown}
+                  iconSizeProperty={this.iconSize}
+                />
+              </div>
 
               <div className='post--item--edit post--detail--third--row'>
                 <MdEdit size={this.iconSize} />

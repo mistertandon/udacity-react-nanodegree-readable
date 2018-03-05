@@ -7,28 +7,28 @@ import TiThumbsDown from 'react-icons/lib/ti/thumbs-down'
 
 const PostThumbUp = (props) => (
 
-  <div className='post--item--thumb--up--down post--detail--third--row'>
+  <div>
 
     {
       (
-        typeof props.postsVotingModObj[props.postDetailObj.id] === 'undefined'
+        typeof props.votingModObj[props.contentDetailObj.id] === 'undefined'
           ? true
-          : props.postsVotingModObj[props.postDetailObj.id].value === 'downVote'
+          : props.votingModObj[props.contentDetailObj.id].value === 'downVote'
       )
       &&
       (
         <MdThumbUp size={props.iconSizeProperty}
           onClick={
             () => {
-              props.reqPostThumbUpOrDownFunc(props.postDetailObj.id, 'upVote')
+              props.reqThumbUpOrDownFunc(props.contentDetailObj.id, 'upVote')
             }
           }
         />
       )
     }
     {
-      typeof props.postsVotingModObj[props.postDetailObj.id] !== 'undefined'
-      && props.postsVotingModObj[props.postDetailObj.id].value === 'upVote'
+      typeof props.votingModObj[props.contentDetailObj.id] !== 'undefined'
+      && props.votingModObj[props.contentDetailObj.id].value === 'upVote'
       &&
       (
         <TiThumbsUp size={props.iconSizeProperty} />
