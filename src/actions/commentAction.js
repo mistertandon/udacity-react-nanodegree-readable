@@ -4,6 +4,7 @@ export const RETRIEVE_POST_COMMENTS = 'RETRIEVE_POST_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
 export const LIKE_COMMENT = 'LIKE_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 export const getPostCommentsAction = (comments) => {
 
@@ -70,11 +71,12 @@ export const editPostComment = (commentObject) => {
     .then(responseComment => dispatch(editPostCommentAction(responseComment)))
 }
 
-const likeCommentAction = (comment, voteType) => (
+const likeCommentAction = (comment, voteType, sortedColumn = '-timestamp') => (
   {
     type: LIKE_COMMENT,
     comment: comment,
-    voteType: voteType
+    voteType: voteType,
+    sortedColumn: sortedColumn
   }
 )
 
@@ -82,4 +84,18 @@ export const likeComment = (id, voteType) => {
 
   return dispatch => API.likeComment(id, voteType)
     .then(responseComment => dispatch(likeCommentAction(responseComment, voteType)))
+}
+
+const deleteCommentAction = (comment, sortedColumn) => (
+  {
+    type: DELETE_COMMENT,
+    comment: comment,
+    sortedColumn: sortedColumn
+  }
+)
+
+export const deleteComment = (id, sortedColumn = '-timestamp') => {
+
+  return dispatch => API.deleteComment(id)
+    .then(responseComment => dispatch(deleteCommentAction(responseComment, sortedColumn)))
 }

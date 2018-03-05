@@ -23,7 +23,8 @@ import {
   getPostComments,
   addPostComment,
   editPostComment,
-  likeComment
+  likeComment,
+  deleteComment
 } from './../actions/commentAction'
 
 const customStyles = {
@@ -41,6 +42,8 @@ const customStyles = {
 class Comment extends Component {
 
   iconSize = 22;
+
+  sortedColumn = '-timestamp';
 
   state = {
     isCommentModalOpen: false,
@@ -121,6 +124,10 @@ class Comment extends Component {
     this.props.dispatchThumbUpOrDownComment(id, voteType)
   }
 
+  deleteComment = (comment) => {
+    this.props.dispatchDeleteComment(comment.id, this.sortedColumn)
+  }
+
   render() {
 
     const { comments, commentsVotingMod } = this.props.comment;
@@ -185,7 +192,7 @@ class Comment extends Component {
                   <div key={`comment_actions_delete_${comment.id}`} className='comment--actions--delete'>
                     <MdDelete onClick={
                       () => {
-                        this.setState(() => ({ comment: comment }))
+                        this.deleteComment(comment)
                       }
                     }
                       size={this.iconSize}
@@ -343,6 +350,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     dispatchThumbUpOrDownComment: (id, voteType) => {
       dispatch(likeComment(id, voteType))
+    },
+    dispatchDeleteComment: (id) => {
+      dispatch(deleteComment(id))
     }
   }
 }
