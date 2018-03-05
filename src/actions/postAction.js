@@ -71,17 +71,18 @@ export const sortPosts = (sortOrder, column) => (
   }
 )
 
-export const likePostAction = (post, voteType) => {
+export const likePostAction = (post, voteType, sortedColumn) => {
 
   return {
     type: LIKE_POST,
     post: post,
-    voteType: voteType
+    voteType: voteType,
+    sortedColumn: sortedColumn
   }
 }
 
-export const likePost = (id, voteType) => {
+export const likePost = (id, voteType, sortedColumn = '-timestamp') => {
 
   return dispatch => API.likePost(id, voteType)
-    .then(response => dispatch(likePostAction(response, voteType)))
+    .then(response => dispatch(likePostAction(response, voteType, sortedColumn)))
 }

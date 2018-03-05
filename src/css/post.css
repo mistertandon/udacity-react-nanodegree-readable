@@ -38,18 +38,34 @@
   margin-top: -5px;
 }
 
-.arrow--drop--down{
-
-}
-
 .post--item--b{
-  width: 140px;
-  max-width: 140px;
+  width: 100px;
+  max-width: 100px;
 }
 
 .post--item--c{
-  width: 140px;
-  max-width: 140px;
+  width: 110px;
+  max-width: 110px;
+  text-align: center;
+}
+
+.post--item--d{
+  width: 120px;
+  max-width: 120px;
+}
+
+.post--item--e{
+  width: 180px;
+  max-width: 180px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.post--item--f{
+  width: 110px;
+  max-width: 110px;
+  text-align: center;
 }
 
 .post--headers{

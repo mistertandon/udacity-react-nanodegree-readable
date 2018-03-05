@@ -9,12 +9,20 @@ import MdEdit from 'react-icons/lib/md/edit'
 import FaEye from 'react-icons/lib/fa/eye'
 import MdArrowDropUp from 'react-icons/lib/md/arrow-drop-up'
 import MdArrowDropDown from 'react-icons/lib/md/arrow-drop-down'
+import MdThumbUp from 'react-icons/lib/md/thumb-up'
+import MdThumbDown from 'react-icons/lib/md/thumb-down'
+import TiThumbsUp from 'react-icons/lib/ti/thumbs-up'
+import TiThumbsDown from 'react-icons/lib/ti/thumbs-down'
+
+import CustomThumbUp from './customThumbUp'
+import CustomThumbDown from './customThumbDown'
 
 import './../css/post.css'
 
 import {
   addPosts,
-  sortPosts
+  sortPosts,
+  likePost
 } from './../actions/postAction'
 
 import SortingSymbol from './sortingSymbol'
@@ -23,12 +31,15 @@ class Post extends Component {
 
   iconDefaultSize = 22;
 
+  currentlySortedColumn = 'timestamp';
+
   gridHeaders = {
     title: 'title',
     author: 'author',
     category: 'category',
     voteScore: 'voteScore',
-    timestamp: 'timestamp'
+    timestamp: 'timestamp',
+    commentCount: 'commentCount'
   }
 
   sortReset = 'reset';
@@ -46,6 +57,9 @@ class Post extends Component {
         sortDirection: this.sortReset
       },
       category: {
+        sortDirection: this.sortReset
+      },
+      commentCount: {
         sortDirection: this.sortReset
       },
       voteScore: {
@@ -73,6 +87,8 @@ class Post extends Component {
         ? this.sortAscending
         : this.sortDescending;
 
+    this.currentlySortedColumn = `${reqSortingDirectionSymbol}${column}`
+
     for (var headerName in stateClone.sortingHeaders) {
 
       stateClone.sortingHeaders[headerName].sortDirection = this.sortReset
@@ -85,9 +101,14 @@ class Post extends Component {
     this.props.dispatchSortPosts(reqSortingDirectionSymbol, column)
   }
 
+  reqPostThumbUpOrDown = (id, voteType) => {
+
+    this.props.dispatchLikePost(id, voteType, this.currentlySortedColumn);
+  }
+
   render() {
 
-    const { posts } = this.props.post;
+    const { posts, postsVotingMod } = this.props.post;
     const { title, author, category, voteScore, timestamp } = this.state.sortingHeaders;
 
     return (
@@ -140,7 +161,16 @@ class Post extends Component {
             <SortingSymbol column={voteScore} />
           </div>
 
-          <div className='flex--row--class post--item--b post--item'
+          <div className='flex--row--class post--item--f post--item'
+            onClick={() => {
+
+              this.sortColumn(this.gridHeaders.commentCount)
+            }}
+          >
+            <div>Comments</div>
+            <SortingSymbol column={voteScore} />
+          </div>
+          <div className='flex--row--class post--item--d post--item'
             onClick={
               () => {
                 this.sortColumn(this.gridHeaders.timestamp)
@@ -151,7 +181,8 @@ class Post extends Component {
             <SortingSymbol column={timestamp} />
           </div>
 
-          <div className='post--item--b post--item'>Actions</div>
+          <div className='post--item--e post--item'>Actions</div>
+
         </div>
 
         {
@@ -168,27 +199,47 @@ class Post extends Component {
               <div key={`post_author_${post.id}`} className='post--item--b post--item'>{post.author}</div>
               <div key={`post_category_${post.id}`} className='post--item--b post--item'>{post.category}</div>
               <div key={`post_vote_score_${post.id}`} className='post--item--c post--item'>{post.voteScore}</div>
-              <div key={`post_timestamp_${post.id}`} className='post--item--b post--item'>{moment(post.timestamp).format('DD-MM-YYYY')}</div>
+              <div className='post--item--f post--item'>
+                {post.commentCount}
+              </div>
+              <div key={`post_timestamp_${post.id}`} className='post--item--d post--item'>{moment(post.timestamp).format('DD-MM-YYYY')}</div>
 
-              <div key={`post_actions_${post.id}`} className='post--item--b post--item'>
+              <div key={`post_actions_${post.id}`} className='post--item--e post--item'>
 
-                <Link to={
-                  {
-                    pathname: '/createPost/',
-                    state: {
-                      isAddOperation: false,
-                      isEditOperation: true,
-                      id: `${post.id}`
+                <CustomThumbUp contentDetailObj={post}
+                  votingModObj={postsVotingMod}
+                  reqThumbUpOrDownFunc={this.reqPostThumbUpOrDown}
+                  iconSizeProperty={this.iconSize}
+                />
+
+                <CustomThumbDown contentDetailObj={post}
+                  votingModObj={postsVotingMod}
+                  reqThumbUpOrDownFunc={this.reqPostThumbUpOrDown}
+                  iconSizeProperty={this.iconSize}
+                />
+
+                <div>
+                  <Link to={
+                    {
+                      pathname: '/createPost/',
+                      state: {
+                        isAddOperation: false,
+                        isEditOperation: true,
+                        id: `${post.id}`
+                      }
                     }
-                  }
-                }>
-                  <MdEdit size={this.iconDefaultSize} />
-                </Link>&nbsp;&nbsp;
-                <Link to={`/postDetail/${post.id}`} >
-                  <FaEye size={this.iconDefaultSize} />
-                </Link>
-                &nbsp;
-                <MdDelete size={this.iconDefaultSize} />
+                  }>
+                    <MdEdit size={this.iconDefaultSize} />
+                  </Link>
+                </div>
+                <div>
+                  <Link to={`/postDetail/${post.id}`} >
+                    <FaEye size={this.iconDefaultSize} />
+                  </Link>
+                </div>
+                <div>
+                  <MdDelete size={this.iconDefaultSize} />
+                </div>
 
               </div>
 
@@ -210,14 +261,28 @@ const mapStateToProps = (state, ownProps) => {
 
   const { activeCategory } = ownProps;
 
-  return activeCategory !== 'all' ? {
-    ...state,
-    post: {
-      ...state.post,
-      posts: state.post.posts.filter(post => post.category === activeCategory)
+  if (activeCategory !== 'all') {
+    state = {
+      ...state,
+      post: {
+        ...state.post,
+        posts: state.post.posts.filter(post => post.category === activeCategory)
+      }
     }
-  } : state;
+  }
 
+  state.post.postsVotingMod = {};
+
+  state.post.postsVoting && state.post.postsVoting.length > 0 && state.post.postsVoting.map(
+    (postsVote) => {
+
+      state.post.postsVotingMod[postsVote.id] = {
+        id: postsVote.id,
+        value: postsVote.value
+      }
+    })
+
+  return state;
 }
 
 /**
@@ -232,6 +297,9 @@ const mapDispatchToProps = (dispatch) => (
     },
     dispatchSortPosts: (sortOrder, column) => {
       dispatch(sortPosts(sortOrder, column))
+    },
+    dispatchLikePost: (id, voteType, currentlySortedColumn) => {
+      dispatch(likePost(id, voteType, currentlySortedColumn))
     }
   }
 )
