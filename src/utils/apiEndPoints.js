@@ -131,3 +131,15 @@ export const likeComment = (id, voteType) => {
   })
     .then(response => response.json())
 }
+
+export const deletePost = (id) => {
+
+  return fetch(`${apiHost}posts/${id}`, {
+    'method': 'DELETE',
+    'headers': {
+      ...headers,
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => response.json())
+}

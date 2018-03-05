@@ -6,6 +6,7 @@ export const ADD_POST = 'ADD_POST';
 export const EDIT_POST = 'EDIT_POST';
 export const SORT_POSTS = 'SORT_POSTS';
 export const LIKE_POST = 'LIKE_POST';
+export const DELETE_POST = 'DELETE_POST';
 
 function addPostsAction(posts) {
 
@@ -85,4 +86,20 @@ export const likePost = (id, voteType, sortedColumn = '-timestamp') => {
 
   return dispatch => API.likePost(id, voteType)
     .then(response => dispatch(likePostAction(response, voteType, sortedColumn)))
+}
+
+export const deletePostAction = (post, sortedColumn) => (
+  {
+    type: DELETE_POST,
+    post: post,
+    sortedColumn: sortedColumn
+  }
+)
+
+
+
+export const deletePost = (id, sortedColumn = '-timestamp') => {
+
+  return dispatch => API.deletePost(id)
+    .then(responsePost => dispatch(deletePostAction(responsePost, sortedColumn)))
 }

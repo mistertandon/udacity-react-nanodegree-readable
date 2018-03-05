@@ -6,7 +6,8 @@ import {
   ADD_POST,
   EDIT_POST,
   SORT_POSTS,
-  LIKE_POST
+  LIKE_POST,
+  DELETE_POST
 } from './../actions/postAction'
 
 import {
@@ -21,8 +22,6 @@ const state = {
 }
 
 export function post(state = {}, action) {
-
-  console.log(state);
 
   switch (action.type) {
 
@@ -77,6 +76,12 @@ export function post(state = {}, action) {
           ]
         ),
       postDetail: action.post
+    }
+
+    case DELETE_POST: return {
+
+      ...state,
+      posts: state.posts.filter(post => post.id !== action.post.id).sort(sortBy(action.sortedColumn))
     }
 
     default: return state;

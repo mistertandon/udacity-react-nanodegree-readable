@@ -22,7 +22,8 @@ import './../css/post.css'
 import {
   addPosts,
   sortPosts,
-  likePost
+  likePost,
+  deletePost
 } from './../actions/postAction'
 
 import SortingSymbol from './sortingSymbol'
@@ -105,6 +106,10 @@ class Post extends Component {
   reqPostThumbUpOrDown = (id, voteType) => {
 
     this.props.dispatchLikePost(id, voteType, this.currentlySortedColumn);
+  }
+
+  deletePost = (post) => {
+    this.props.dispatchDeletePost(post.id, this.currentlySortedColumn)
   }
 
   render() {
@@ -217,7 +222,13 @@ class Post extends Component {
                   </Link>
                 </div>
                 <div>
-                  <MdDelete size={this.iconDefaultSize} />
+                  <MdDelete size={this.iconDefaultSize}
+                    onClick={
+                      () => {
+                        this.deletePost(post)
+                      }
+                    }
+                  />
                 </div>
 
               </div>
@@ -279,6 +290,9 @@ const mapDispatchToProps = (dispatch) => (
     },
     dispatchLikePost: (id, voteType, currentlySortedColumn) => {
       dispatch(likePost(id, voteType, currentlySortedColumn))
+    },
+    dispatchDeletePost: (id) => {
+      dispatch(deletePost(id))
     }
   }
 )
