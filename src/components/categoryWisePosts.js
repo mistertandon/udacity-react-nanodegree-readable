@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 
 import './../css/categoryWise.css'
 
-import { addPosts } from './../actions/postAction'
 import Post from './post'
 import PostGridLink from './postGridLink'
 
