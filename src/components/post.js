@@ -26,7 +26,7 @@ class Post extends Component {
 
   iconDefaultSize = 22;
 
-  currentlySortedColumn = 'timestamp';
+  currentlySortedColumn = '-timestamp';
 
   gridHeaders = {
     title: 'title',
