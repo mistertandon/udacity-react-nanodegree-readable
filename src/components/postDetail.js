@@ -1,20 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Router, Link } from 'react-router-dom'
 
-import MdAddCircle from 'react-icons/lib/md/add-circle'
 import MdChevronLeft from 'react-icons/lib/md/chevron-left'
 import MdChevronRight from 'react-icons/lib/md/chevron-right'
-
 import MdDelete from 'react-icons/lib/md/delete'
-import MdEdit from 'react-icons/lib/md/edit'
 import FaHeart from 'react-icons/lib/fa/heart'
-import FaHeartO from 'react-icons/lib/fa/heart-o'
-
-import MdThumbUp from 'react-icons/lib/md/thumb-up'
-import MdThumbDown from 'react-icons/lib/md/thumb-down'
-import TiThumbsUp from 'react-icons/lib/ti/thumbs-up'
-import TiThumbsDown from 'react-icons/lib/ti/thumbs-down'
 
 import './../css/postDetail.css'
 
@@ -24,7 +14,6 @@ import {
   deletePost
 } from './../actions/postAction'
 
-import { getPostComments } from './../actions/commentAction'
 
 import CustomThumbUp from './customThumbUp'
 import CustomThumbDown from './customThumbDown'
@@ -68,19 +57,6 @@ class PostDetail extends Component {
         </div>
         <div className='post--add--new'>
           <AddPostLink iconSize='28' />
-          {/* <Link to={
-            {
-              pathname: '/createPost',
-              state: {
-                isAddOperation: true,
-                isEditOperation: false,
-                id: ''
-              }
-            }
-          }
-          >
-            <MdAddCircle size={28} />
-          </Link> */}
         </div>
         {
 
