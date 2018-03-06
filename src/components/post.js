@@ -30,6 +30,8 @@ import SortingSymbol from './sortingSymbol'
 import PostGridHeader from './postGridHeader'
 import AddPostLink from './addPostLink'
 import EditPostLink from './editPostLink'
+import PostViewLink from './postViewLink'
+
 class Post extends Component {
 
   iconDefaultSize = 22;
@@ -210,11 +212,11 @@ class Post extends Component {
                 <div>
                   <EditPostLink id={post.id} iconSize={this.iconSize} />
                 </div>
+
                 <div>
-                  <Link to={`/postDetail/${post.id}`} >
-                    <FaEye size={this.iconDefaultSize} />
-                  </Link>
+                  <PostViewLink id={post.id} iconSize={this.iconDefaultSize} />
                 </div>
+
                 <div>
                   <MdDelete size={this.iconDefaultSize}
                     onClick={
