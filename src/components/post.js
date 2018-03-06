@@ -28,7 +28,8 @@ import {
 
 import SortingSymbol from './sortingSymbol'
 import PostGridHeader from './postGridHeader'
-
+import AddPostLink from './addPostLink'
+import EditPostLink from './editPostLink'
 class Post extends Component {
 
   iconDefaultSize = 22;
@@ -122,7 +123,9 @@ class Post extends Component {
     return (
 
       <div className='posts--container'>
-
+        <div>
+          <AddPostLink size='28' />
+        </div>
         <div className='post--container post--headers'>
 
           <PostGridHeader parentDivClassName='flex--row--class post--item--a post--item'
@@ -205,18 +208,7 @@ class Post extends Component {
                 />
 
                 <div>
-                  <Link to={
-                    {
-                      pathname: '/createPost/',
-                      state: {
-                        isAddOperation: false,
-                        isEditOperation: true,
-                        id: `${post.id}`
-                      }
-                    }
-                  }>
-                    <MdEdit size={this.iconDefaultSize} />
-                  </Link>
+                  <EditPostLink id={post.id} iconSize={this.iconSize} />
                 </div>
                 <div>
                   <Link to={`/postDetail/${post.id}`} >

@@ -32,6 +32,8 @@ import CustomThumbDown from './customThumbDown'
 import Comment from './../components/comment'
 
 import PostGridLink from './postGridLink'
+import AddPostLink from './addPostLink'
+import EditPostLink from './editPostLink'
 
 class PostDetail extends Component {
 
@@ -65,7 +67,8 @@ class PostDetail extends Component {
           <PostGridLink />
         </div>
         <div className='post--add--new'>
-          <Link to={
+          <AddPostLink iconSize='28' />
+          {/* <Link to={
             {
               pathname: '/createPost',
               state: {
@@ -77,7 +80,7 @@ class PostDetail extends Component {
           }
           >
             <MdAddCircle size={28} />
-          </Link>
+          </Link> */}
         </div>
         {
 
@@ -111,8 +114,9 @@ class PostDetail extends Component {
               </div>
 
               <div className='post--item--edit post--detail--third--row'>
-                <MdEdit size={this.iconSize} />
+                <EditPostLink id={postDetail.id} iconSize={this.iconSize} />
               </div>
+
               <div className='post--item--delete post--detail--third--row'>
                 <MdDelete size={this.iconSize}
                   onClick={

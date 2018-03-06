@@ -42,6 +42,7 @@ class CreatePost extends Component {
     });
 
     this.props.dispacthAddPost(post);
+    this.props.history.push('/');
   }
 
   handlePostEditRequest = (event) => {
@@ -50,6 +51,7 @@ class CreatePost extends Component {
     const formObj = serializeForm(event.target, { hash: true });
 
     this.props.dispacthEditPost(formObj);
+    this.props.history.push('/');
   }
 
   render() {
