@@ -10,6 +10,8 @@ import {
   editPost
 } from './../actions/postAction'
 
+import PostGridLink from './postGridLink'
+
 class CreatePost extends Component {
 
   state = {
@@ -59,6 +61,9 @@ class CreatePost extends Component {
     return (
 
       <div className='create--post--container' >
+
+        <div><PostGridLink /></div>
+
         {
           isAddOperation && (
             <div className='create--post--heading'>

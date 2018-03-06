@@ -20,7 +20,8 @@ import './../css/postDetail.css'
 
 import {
   getPost,
-  likePost
+  likePost,
+  deletePost
 } from './../actions/postAction'
 
 import { getPostComments } from './../actions/commentAction'
@@ -29,6 +30,8 @@ import CustomThumbUp from './customThumbUp'
 import CustomThumbDown from './customThumbDown'
 
 import Comment from './../components/comment'
+
+import PostGridLink from './postGridLink'
 
 class PostDetail extends Component {
 
@@ -44,6 +47,12 @@ class PostDetail extends Component {
     this.props.dispatchLikePost(id, voteType);
   }
 
+  deletePost = (post) => {
+
+    this.props.dispatchDeletePost(post.id);
+    this.props.history.push('/');
+  }
+
   render() {
 
     const { postDetail, postsVotingMod } = this.props.post;
@@ -51,8 +60,10 @@ class PostDetail extends Component {
 
     return (
 
-      <div className='post--detail--container'>
-
+      <div className='post--detail--container' >
+        <div>
+          <PostGridLink />
+        </div>
         <div className='post--add--new'>
           <Link to={
             {
@@ -103,7 +114,14 @@ class PostDetail extends Component {
                 <MdEdit size={this.iconSize} />
               </div>
               <div className='post--item--delete post--detail--third--row'>
-                <MdDelete size={this.iconSize} />
+                <MdDelete size={this.iconSize}
+                  onClick={
+                    () => {
+
+                      this.deletePost(postDetail)
+                    }
+                  }
+                />
               </div>
             </div>
           )
@@ -112,7 +130,7 @@ class PostDetail extends Component {
         {
           <Comment id={id} />
         }
-      </div>
+      </div >
     )
   }
 }
@@ -143,6 +161,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     dispatchLikePost: (id, voteType) => {
       dispatch(likePost(id, voteType))
+    },
+    dispatchDeletePost: (id) => {
+      dispatch(deletePost(id))
     }
   }
 }

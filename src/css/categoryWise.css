@@ -6,4 +6,6 @@
 
 .category--title{
   flex-grow: 0.5;
+  font-weight: bold;
+  text-transform: capitalize;
 }

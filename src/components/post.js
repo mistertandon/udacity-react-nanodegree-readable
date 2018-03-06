@@ -50,6 +50,8 @@ class Post extends Component {
 
   sortDescending = '-';
 
+  noPostFound = 'No Post Found';
+
   state = {
     sortingHeaders: {
       title: {
@@ -235,6 +237,13 @@ class Post extends Component {
 
             </div>
           ))
+        }
+        {
+          posts && posts.length === 0 && (
+            <div>
+              {this.noPostFound}
+            </div>
+          )
         }
       </div>
 

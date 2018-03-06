@@ -7,6 +7,7 @@ import './../css/categoryWise.css'
 import { addCategories } from './../actions/categoryAction'
 import { addPosts } from './../actions/postAction'
 import Post from './post'
+import PostGridLink from './postGridLink'
 
 class CategoryWisePosts extends Component {
 
@@ -17,6 +18,9 @@ class CategoryWisePosts extends Component {
     const posts = [];
     return (
       <div className='category--page'>
+        <div className='category--title'>
+          <PostGridLink />
+        </div>
         <div className='category--title'>
           {activeCategory}
         </div>
