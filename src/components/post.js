@@ -1,18 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Route, Link } from 'react-router-dom'
 import moment from 'moment';
 import 'moment/locale/de';
 
 import MdDelete from 'react-icons/lib/md/delete'
-import MdEdit from 'react-icons/lib/md/edit'
-import FaEye from 'react-icons/lib/fa/eye'
-import MdArrowDropUp from 'react-icons/lib/md/arrow-drop-up'
-import MdArrowDropDown from 'react-icons/lib/md/arrow-drop-down'
-import MdThumbUp from 'react-icons/lib/md/thumb-up'
-import MdThumbDown from 'react-icons/lib/md/thumb-down'
-import TiThumbsUp from 'react-icons/lib/ti/thumbs-up'
-import TiThumbsDown from 'react-icons/lib/ti/thumbs-down'
 
 import CustomThumbUp from './customThumbUp'
 import CustomThumbDown from './customThumbDown'
@@ -26,7 +17,6 @@ import {
   deletePost
 } from './../actions/postAction'
 
-import SortingSymbol from './sortingSymbol'
 import PostGridHeader from './postGridHeader'
 import AddPostLink from './addPostLink'
 import EditPostLink from './editPostLink'
