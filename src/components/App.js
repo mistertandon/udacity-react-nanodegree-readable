@@ -4,13 +4,6 @@ import { Route } from 'react-router-dom'
 import './../App.css'
 import './../css/index.css'
 
-import { TiArrowSortedDown } from 'react-icons/lib/ti/arrow-sorted-down'
-import { TiArrowSortedUp } from 'react-icons/lib/ti/arrow-sorted-up'
-
-import API from './../utils/api'
-import { addCategories } from './../actions/categoryAction'
-import { addPosts } from './../actions/postAction'
-
 import Header from './header'
 import Category from './category'
 import Post from './post'
