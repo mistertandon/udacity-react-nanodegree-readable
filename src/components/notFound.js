@@ -4,6 +4,7 @@ import './../css/notFound.css'
 import PostGridLink from './postGridLink'
 
 const NotFound = () => (
+
   <div className='not--found--container'>
     <div>
       <PostGridLink />
