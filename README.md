@@ -10,3 +10,9 @@
 1. Navigate up to the root folder
 2. Run `npm start`
 
+----
+![](https://raw.githubusercontent.com/mistertandon/udacity-react-nanodegree-readable/master/public/images/home_page.png)
+
+> Application home page
+
+----
