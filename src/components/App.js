@@ -10,6 +10,7 @@ import Post from './post'
 import CategoryWisePosts from './categoryWisePosts'
 import PostDetail from './postDetail'
 import CreatePost from './createPost'
+import NotFound from './notFound'
 
 class App extends Component {
 
@@ -38,18 +39,10 @@ class App extends Component {
             )
         } />
 
-        <Route exact path='/notfound' render={
-          () => (
-
-            <div>Not found</div>
-          )
-        }
-        />
-
+        <Route exact path='/notfound' component={NotFound} />
         <Route exact path='/createPost/' component={CreatePost} />
         <Route exact path='/:category(react|redux|udacity)' component={CategoryWisePosts} />
         <Route exact path='/:category/:id' component={PostDetail} />
-
 
       </div>
     )

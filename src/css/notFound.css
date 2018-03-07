@@ -1,0 +1,9 @@
+.not--found--container{
+  display: flex;
+  flex-direction: column;
+}
+
+.not--found--content{
+  margin-top: 20px;
+  flex-grow: 1;
+}
