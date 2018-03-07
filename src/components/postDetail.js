@@ -14,7 +14,6 @@ import {
   deletePost
 } from './../actions/postAction'
 
-
 import CustomThumbUp from './customThumbUp'
 import CustomThumbDown from './customThumbDown'
 
@@ -44,6 +43,10 @@ class PostDetail extends Component {
     this.props.history.push('/');
   }
 
+  redirect404 = () => {
+    this.props.history.push('/notfound');
+  }
+
   render() {
 
     const { postDetail, postsVotingMod } = this.props.post;
@@ -60,7 +63,7 @@ class PostDetail extends Component {
         </div>
         {
 
-          postDetail && (
+          postDetail && typeof postDetail.error === 'undefined' && (
             <div className='post--detail'>
 
               <div className='post--item--vote post--detail--first--row'>
@@ -107,16 +110,24 @@ class PostDetail extends Component {
           )
 
         }
+
         {
-          <Comment id={id} />
+          postDetail && typeof postDetail.error === 'undefined' && (
+            <Comment id={id} />
+          )
         }
+
+        {
+          postDetail && postDetail.error && this.redirect404()
+        }
+
       </div >
     )
   }
 }
 
 const mapStateToProps = (state) => {
-
+  console.log(state);
   state.post.postsVotingMod = {};
 
   state.post.postsVoting && state.post.postsVoting.length > 0 && state.post.postsVoting.map(
@@ -127,7 +138,7 @@ const mapStateToProps = (state) => {
         value: postsVote.value
       }
     })
-
+  console.log(state);
   return state;
 }
 

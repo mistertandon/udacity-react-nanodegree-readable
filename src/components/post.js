@@ -204,7 +204,7 @@ class Post extends Component {
                 </div>
 
                 <div>
-                  <PostViewLink id={post.id} iconSize={this.iconDefaultSize} />
+                  <PostViewLink id={post.id} category={post.category} iconSize={this.iconDefaultSize} />
                 </div>
 
                 <div>

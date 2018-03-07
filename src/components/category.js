@@ -21,17 +21,6 @@ class Category extends Component {
 
       <div className="category--container">
 
-        <div className='category--item'>
-          <Link to={
-            {
-              pathname: '/category',
-              state: {
-                activeCategory: 'all'
-              }
-            }
-          }>All</Link>
-        </div>
-
         {
           categories && categories.length && categories.map(
             (category, index) =>
@@ -41,7 +30,7 @@ class Category extends Component {
                   key={`${index}_category`}>
                   <Link to={
                     {
-                      pathname: '/category',
+                      pathname: `/${category.name}`,
                       state: {
                         activeCategory: `${category.name}`
                       }

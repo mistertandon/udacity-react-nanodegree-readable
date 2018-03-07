@@ -23,7 +23,6 @@ class App extends Component {
             (
               <div className='home--page'>
                 {
-
                   /**
                    * Calling `Category` react component.
                    */
@@ -34,15 +33,23 @@ class App extends Component {
                    * Calling `Post` react component.
                    */
                 }
-                <Post activeCategory={'all'}/>
+                <Post activeCategory={'all'} />
               </div>
             )
         } />
 
-        <Route exact path='/category' component={CategoryWisePosts} />
+        <Route exact path='/notfound' render={
+          () => (
 
-        <Route exact path='/postDetail/:id' component={PostDetail} />
+            <div>Not found</div>
+          )
+        }
+        />
+
         <Route exact path='/createPost/' component={CreatePost} />
+        <Route exact path='/:category(react|redux|udacity)' component={CategoryWisePosts} />
+        <Route exact path='/:category/:id' component={PostDetail} />
+
 
       </div>
     )

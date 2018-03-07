@@ -33,7 +33,10 @@ export const getPostAction = (postDetail) => {
 export const getPost = (id) => {
 
   return (dispatch) => API.getPost(id)
-    .then(postDetail => dispatch(getPostAction(postDetail)))
+    .then(
+      postDetail => dispatch(getPostAction(postDetail)),
+      err => dispatch(getPostAction(err))
+    )
 }
 
 export const addPostAction = (post) => {
