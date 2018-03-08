@@ -51,7 +51,7 @@ class PostDetail extends Component {
 
     const { postDetail, postsVotingMod } = this.props.post;
     const { id } = this.props.match.params
-
+    console.log(postDetail);
     return (
 
       <div className='post--detail--container' >
@@ -63,7 +63,7 @@ class PostDetail extends Component {
         </div>
         {
 
-          postDetail && typeof postDetail.error === 'undefined' && (
+          postDetail && Object.keys(postDetail).length !== 0 && typeof postDetail.error === 'undefined' && (
             <div className='post--detail'>
 
               <div className='post--item--vote post--detail--first--row'>
@@ -120,6 +120,9 @@ class PostDetail extends Component {
         {
           postDetail && postDetail.error && this.redirect404()
         }
+        {
+          postDetail && Object.keys(postDetail).length === 0 && this.redirect404()
+        }
 
       </div >
     )
@@ -127,7 +130,7 @@ class PostDetail extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
+
   state.post.postsVotingMod = {};
 
   state.post.postsVoting && state.post.postsVoting.length > 0 && state.post.postsVoting.map(
@@ -138,7 +141,7 @@ const mapStateToProps = (state) => {
         value: postsVote.value
       }
     })
-  console.log(state);
+
   return state;
 }
 
