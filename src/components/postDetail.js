@@ -51,7 +51,7 @@ class PostDetail extends Component {
 
     const { postDetail, postsVotingMod } = this.props.post;
     const { id } = this.props.match.params
-    console.log(postDetail);
+
     return (
 
       <div className='post--detail--container' >
